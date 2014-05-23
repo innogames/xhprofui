@@ -1,0 +1,4 @@
+xhprof_gui:
+    resource: "@XhprofGuiBundle/Resources/config/routing.yml"
+    prefix:   /
+
