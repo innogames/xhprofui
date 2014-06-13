@@ -1,6 +1,10 @@
 parameters:
     xhprof.store.profiling.controller.class: Xhprof\StoreBundle\Controller\ProfilingController
+    xhprof.profiling.save.handler.class: Xhprof\StoreBundle\Services\ProfilingSaveHandler
 
 services:
     xhprof.store.profiling.controller:
         class: "%xhprof.store.profiling.controller.class%"
+    xhprof.profiling.save.handler:
+         class:        "%xhprof.profiling.save.handler.class%"
+         #arguments:    ["%my_mailer.transport%"]

@@ -9,6 +9,9 @@ class ProfilingController extends Controller
 {
     public function storeAction()
     {
+
+        $this->get('terst');
+
         return $this->render('XhprofStoreBundle:Profiling:store.html.twig');
     }
 }
