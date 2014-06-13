@@ -1,15 +1,5 @@
 <?php
 
-xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
-
-register_shutdown_function(function() {
-    $xhprof_data = xhprof_disable();
-    echo "<pre>";
-    print_r($xhprof_data);
-    echo "</pre>";
- });
-
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 

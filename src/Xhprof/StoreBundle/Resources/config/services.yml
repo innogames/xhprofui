@@ -7,4 +7,5 @@ services:
         class: "%xhprof.store.profiling.controller.class%"
     xhprof.profiling.save.handler:
          class:        "%xhprof.profiling.save.handler.class%"
-         #arguments:    ["%my_mailer.transport%"]
+         calls:
+                     - [setContainer, ["@service_container"]]
