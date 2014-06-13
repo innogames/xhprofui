@@ -1,3 +1,7 @@
+xhprof_store:
+    resource: "@XhprofStoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
 xhprof_gui:
     resource: "@XhprofGuiBundle/Resources/config/routing.yml"
     prefix:   /
