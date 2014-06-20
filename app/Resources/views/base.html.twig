@@ -1,19 +1,29 @@
+{# app/Resources/views/base.html.twig #}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {% stylesheets
+            'vendor/bootstrap-3.1.1/css/bootstrap.min.css'
+            'vendor/bootstrap-3.1.1/css/bootstrap-theme.min.css'
+            filter='cssrewrite'
+            %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
             {% javascripts
-            '@XhprofGuiBundle/Resources/public/jquery/jquery-2.1.1.js'
-            '@XhprofGuiBundle/Resources/public/bootstrap-3.1.1/js/bootstrap.js'  output='js/compiled/main.js'
+                'vendor/jquery/jquery-2.1.1.min.js'
+                'vendor/bootstrap-3.1.1/js/bootstrap.min.js'
+                output='js/compiled/main.js'
             %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
+                <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
     </body>
