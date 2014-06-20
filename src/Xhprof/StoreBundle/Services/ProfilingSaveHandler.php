@@ -1,10 +1,20 @@
 <?php
 namespace Xhprof\StoreBundle\Services;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Xhprof\StoreBundle\Entity\Profiling;
+class ProfilingSaveHandler {
 
-class ProfilingSaveHandler extends ContainerAware {
+    /**
+     * @var ProfilingDataManager
+     */
+    private $data_manager;
+
+    /**
+     * @param ProfilingDataManager $data_manager
+     */
+    public function __construct(ProfilingDataManager $data_manager)
+    {
+        $this->data_manager = $data_manager;
+    }
 
     /**
      * register the profiling save handler
@@ -23,37 +33,7 @@ class ProfilingSaveHandler extends ContainerAware {
     public function shutdownFunction()
     {
         $xhprof_data = xhprof_disable();
-        $this->save($xhprof_data);
-    }
-
-    /**
-     * @param array $xhprof_data
-     *
-     * @return void
-     */
-    private function save(array $xhprof_data)
-    {
-        $main = $xhprof_data['main()'];
-
-        $handle = fopen('php://memory', 'w+');
-        $gzdata = gzcompress(json_encode($xhprof_data));
-        fputs($handle, $gzdata);
-        rewind($handle);
-
-        $profiling = new Profiling();
-        $profiling->setData($handle);
-        $profiling->setCpu($main['pmu']);
-        $profiling->setMemory($main['mu']);
-        $profiling->setPeakMemory($main['cpu']);
-        $profiling->setTimestamp(new \DateTime());
-        $profiling->setWallTime($main['wt']);
-
-        $em = $this->container->get('doctrine')->getEntityManager();
-
-        $em->persist($profiling);
-        $em->flush();
-
-        fclose($handle);
+        $this->data_manager->save($xhprof_data);
     }
 
 
