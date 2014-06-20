@@ -14,13 +14,14 @@ class ProfilingSaveHandler extends ContainerAware {
     public function register()
     {
         xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
-        //register_shutdown_function(array($this, 'shutdownFunction'));
+        register_shutdown_function(array($this, 'shutdownFunction'));
     }
 
     /**
      * @return void
      */
-    public function shutdownFunction() {
+    public function shutdownFunction()
+    {
         $xhprof_data = xhprof_disable();
         $this->save($xhprof_data);
     }
@@ -30,7 +31,8 @@ class ProfilingSaveHandler extends ContainerAware {
      *
      * @return void
      */
-    public function save(array $xhprof_data) {
+    private function save(array $xhprof_data)
+    {
         $main = $xhprof_data['main()'];
 
         $handle = fopen('php://memory', 'w+');

@@ -8,6 +8,13 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            {% javascripts
+            '@XhprofGuiBundle/Resources/public/jquery/jquery-2.1.1.js'
+            '@XhprofGuiBundle/Resources/public/bootstrap-3.1.1/js/bootstrap.js'  output='js/compiled/main.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
     </body>
 </html>

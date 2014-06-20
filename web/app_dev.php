@@ -1,5 +1,7 @@
 <?php
 
+include '../scripts/xhprof_handler.php';
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
