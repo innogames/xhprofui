@@ -40,7 +40,7 @@ class ProfilingController extends Controller
         }
 
         return $this->render(
-            'XhprofGuiBundle:Profiling:index.html.twig',
+            'XhprofGuiBundle:Profiling:show.html.twig',
             array('profiling' => $profiling, 'data' => $data)
         );
     }

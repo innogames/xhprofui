@@ -1,40 +1,31 @@
-{% extends '::base.html.twig' %}
+{% extends 'XhprofGuiBundle::layout.html.twig' %}
 
-{% block title %}Profiling{% endblock %}
+{% block title %}Profilings list{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Profiling Runs</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-condensed">
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Timestamp</th>
-                        <th>Script</th>
-                        <th>Server</th>
-                        <th>Walltime</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for profiling in profilings %}
-                        <tr>
-                            <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a></td>
-                            <td>timestamp</td>
-                            <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a></td>
-                            <td>{{ profiling.getServerName }}</td>
-                            <td>{{ profiling.getWalltime }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+{% block content %}
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Timestamp</th>
+            <th>Script</th>
+            <th>Server</th>
+            <th>Walltime</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for profiling in profilings %}
+            <tr>
+                <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a></td>
+                <td>timestamp</td>
+                <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a>
+                </td>
+                <td>{{ profiling.getServerName }}</td>
+                <td>{{ profiling.getWalltime }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     </div>
 {% endblock %}
 
