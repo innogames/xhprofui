@@ -37,9 +37,9 @@ class ProfilingSaveHandler extends ContainerAware {
 
         $profiling = new Profiling();
         $profiling->setData($xhprof_data);
-        $profiling->setCpu($main['pmu']);
+        $profiling->setCpu($main['cpu']);
         $profiling->setMemory($main['mu']);
-        $profiling->setPeakMemory($main['cpu']);
+        $profiling->setPeakMemory($main['pmu']);
         $profiling->setTimestamp(new \DateTime());
         $profiling->setWallTime($main['wt']);
         $profiling->setRequestUri($_SERVER['REQUEST_URI']);

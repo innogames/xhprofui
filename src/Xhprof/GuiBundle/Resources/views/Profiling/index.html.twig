@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <table class="table">
+                <table class="table table-condensed">
                     <tbody>
                     <tr>
                         <td><strong>Server Name</strong></td>
@@ -27,49 +27,101 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-condensed">
+                            <tbody>
+                            <tr>
+                                <td><strong>Walltime</strong></td>
+                                <td>{{ profiling.getWallTime }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CPU</strong></td>
+                                <td>{{ profiling.getCpu }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Memory</strong></td>
+                                <td>{{ profiling.getMemory }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Peak Memory</strong></td>
+                                <td>{{ profiling.getPeakMemory }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
-                <table class="table">
+                <table class="table table-condensed">
                     <tbody>
-                        <tr>
-                            <td><strong>GET</strong></td>
-                            <td>
-                                <table class="table table-striped">
-                                {% for key, param in profiling.GetParams %}
+                    <tr>
+                        <td><strong>GET</strong></td>
+                        <td>
+                            <table class="table table-striped">
+                                {% for key, param in profiling.getGetParams %}
                                     <tr>
                                         <td>{{ key }}</td>
                                         <td>{{ param }}</td>
                                     </tr>
                                 {% endfor %}
-                                </table>
-                            </td>
-                        </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>POST</strong></td>
+                        <td>
+                            <table class="table table-striped">
+                                {% for key, param in profiling.getPostParams %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ param }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>COOKIE</strong></td>
+                        <td>
+                            <table class="table table-striped">
+                                {% for key, param in profiling.getCookiesParams %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ param }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-striped">
+                    <thead>
                         <tr>
-                            <td><strong>POST</strong></td>
-                            <td>
-                                <table class="table table-striped">
-                                    {% for key, param in profiling.PostParams %}
-                                        <tr>
-                                            <td>{{ key }}</td>
-                                            <td>{{ param }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </table>
-                            </td>
+                            <th>Function</th>
+                            <th>ct</th>
+                            <th>wt</th>
+                            <th>cpu</th>
+                            <th>mu</th>
+                            <th>pmu</th>
                         </tr>
-                        <tr>
-                            <td><strong>COOKIE</strong></td>
-                            <td>
-                                <table class="table table-striped">
-                                    {% for key, param in profiling.CookiesParams %}
-                                        <tr>
-                                            <td>{{ key }}</td>
-                                            <td>{{ param }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </table>
-                            </td>
-                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for function, data in data %}
+                            <tr>
+                                <td>{{ function }}</td>
+                                <td>{{ data.ct }}</td>
+                                <td>{{ data.wt }}</td>
+                                <td>{{ data.cpu }}</td>
+                                <td>{{ data.mu }}</td>
+                                <td>{{ data.pmu }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

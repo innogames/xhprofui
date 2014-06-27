@@ -1,3 +1,6 @@
-xhprof_gui_homepage:
-    pattern:  /profiling/{id}
+xhprof_gui_show:
+    pattern:  /profiling/show/{id}
     defaults: { _controller: XhprofGuiBundle:Profiling:index }
+xhprof_gui_test:
+    pattern: /profiling/test
+    defaults: { _controller: XhprofGuiBundle:Profiling:test }
