@@ -24,9 +24,9 @@
                     <tbody>
                     {% for profiling in profilings %}
                         <tr>
-                            <td><a href="/app_dev.php/profiling/view/{{ profiling.getId }}">{{ profiling.getId }}</a></td>
+                            <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a></td>
                             <td>timestamp</td>
-                            <td><a href="/app_dev.php/profiling/show/{{ profiling.getId }}">{{ profiling.getRequestUri }}</a></td>
+                            <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a></td>
                             <td>{{ profiling.getServerName }}</td>
                             <td>{{ profiling.getWalltime }}</td>
                         </tr>
