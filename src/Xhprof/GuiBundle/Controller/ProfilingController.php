@@ -11,7 +11,6 @@ class ProfilingController extends Controller
         $doctrine = $this->get('doctrine');
         $profiling = $doctrine->getRepository('XhprofGuiBundle:Profiling')
             ->find($id);
-        var_dump($profiling);
-        return $this->render('XhprofGuiBundle:Profiling:index.html.twig', array('id' => $id));
+        return $this->render('XhprofGuiBundle:Profiling:index.html.twig', array('profiling' => $profiling));
     }
 }

@@ -3,6 +3,77 @@
 {% block title %}Profiling{% endblock %}
 
 {% block body %}
-    Hello {{ id }}! dffdsds
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Profiling Run #{{ profiling.Id }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td><strong>Server Name</strong></td>
+                        <td>{{ profiling.getServerName }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Script</strong></td>
+                        <td>{{ profiling.getRequestUri }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Request Method</strong></td>
+                        <td>{{ profiling.getRequestMethod }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>GET</strong></td>
+                            <td>
+                                <table class="table table-striped">
+                                {% for key, param in profiling.GetParams %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ param }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>POST</strong></td>
+                            <td>
+                                <table class="table table-striped">
+                                    {% for key, param in profiling.PostParams %}
+                                        <tr>
+                                            <td>{{ key }}</td>
+                                            <td>{{ param }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>COOKIE</strong></td>
+                            <td>
+                                <table class="table table-striped">
+                                    {% for key, param in profiling.CookiesParams %}
+                                        <tr>
+                                            <td>{{ key }}</td>
+                                            <td>{{ param }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
