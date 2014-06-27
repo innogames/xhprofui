@@ -1,5 +1,5 @@
 <?php
-namespace Xhprof\StoreBundle\Services;
+namespace Xhprof\GuiBundle\Services;
 
 class ProfilingSaveHandler {
 

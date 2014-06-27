@@ -4,7 +4,7 @@ namespace Xhprof\GuiBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class ProfilingControllerTest extends WebTestCase
 {
     public function testIndex()
     {

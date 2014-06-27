@@ -1,8 +1,8 @@
 <?php
-namespace Xhprof\StoreBundle\Services;
+namespace Xhprof\GuiBundle\Services;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Xhprof\StoreBundle\Entity\Profiling;
+use Xhprof\GuiBundle\Entity\Profiling;
 
 class ProfilingDataManager extends ContainerAware {
 
@@ -39,8 +39,8 @@ class ProfilingDataManager extends ContainerAware {
     public function loadById($id)
     {
         $doctrine = $this->container->get('doctrine');
-        /** @var Xhprof\StoreBundle\Entity\Profiling $profiling */
-        return $doctrine->getRepository('XhprofStoreBundle:Profiling')
+        /** @var Xhprof\GuiBundle\Entity\Profiling $profiling */
+        return $doctrine->getRepository('XhprofGuiBundle:Profiling')
             ->find($id);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Xhprof\StoreBundle\Entity;
+namespace Xhprof\GuiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Profiling
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Xhprof\StoreBundle\Entity\ProfilingRepository")
+ * @ORM\Entity(repositoryClass="Xhprof\GuiBundle\Entity\ProfilingRepository")
  */
 class Profiling
 {

@@ -1,7 +1,12 @@
 parameters:
-#    xhprof_gui.example.class: Xhprof\GuiBundle\Example
+    xhprof.profiling.save.handler.class: Xhprof\GuiBundle\Services\ProfilingSaveHandler
+    xhprof.profiling.data.manager.class: Xhprof\GuiBundle\Services\ProfilingDataManager
 
 services:
-#    xhprof_gui.example:
-#        class: %xhprof_gui.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    xhprof.profiling.data.manager:
+         class:        "%xhprof.profiling.data.manager.class%"
+         calls:
+                     - [setContainer, ["@service_container"]]
+    xhprof.profiling.save.handler:
+             class:        "%xhprof.profiling.save.handler.class%"
+             arguments:    ["@xhprof.profiling.data.manager"]

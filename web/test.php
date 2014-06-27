@@ -20,7 +20,7 @@ echo "test";
 
 $doctrine = $kernel->getContainer()->get('doctrine');
 /** @var Xhprof\StoreBundle\Entity\Profiling $profiling */
-$profiling = $doctrine->getRepository('XhprofStoreBundle:Profiling')
+$profiling = $doctrine->getRepository('XhprofGuiBundle:Profiling')
     ->find(10);
 
 $resource = $profiling->getData();

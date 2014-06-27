@@ -1,3 +1,0 @@
-xhprof_store_homepage:
-    pattern:  /profilings/store
-    defaults: { _controller: XhprofStoreBundle:Profiling:store }

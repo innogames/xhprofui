@@ -1,6 +1,6 @@
 <?php
 
-namespace Xhprof\StoreBundle\Entity;
+namespace Xhprof\GuiBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
