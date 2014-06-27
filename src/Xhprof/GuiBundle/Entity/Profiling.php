@@ -238,11 +238,7 @@ class Profiling
      */
     public function setData($data)
     {
-        $handle = fopen('php://memory', 'w');
-        $gzdata = gzcompress(json_encode($data));
-        fputs($handle, $gzdata);
-        rewind($handle);
-        $this->data = $handle;
+        $this->data = gzcompress(json_encode($data));
         return $this;
     }
 
