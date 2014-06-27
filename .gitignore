@@ -12,4 +12,4 @@
 /atlassian-ide-plugin.xml
 /.idea
 /.DS_Store
-/web/js/compiled/
+/web/js/compiled/*
