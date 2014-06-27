@@ -8,8 +8,9 @@ class ProfilingController extends Controller
 {
     public function indexAction($id)
     {
-        $data_manager = $this->get('xhprof.profiling.data.manager');
-        $profiling = $data_manager->loadById($id);
+        $doctrine = $this->get('doctrine');
+        $profiling = $doctrine->getRepository('XhprofGuiBundle:Profiling')
+            ->find($id);
         var_dump($profiling);
         return $this->render('XhprofGuiBundle:Profiling:index.html.twig', array('id' => $id));
     }

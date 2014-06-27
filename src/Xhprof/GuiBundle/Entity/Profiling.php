@@ -196,8 +196,12 @@ class Profiling
      */
     public function setData($data)
     {
-        $this->data = $data;
-
+        //$this->data = $data;
+        $handle = fopen('php://memory', 'w+');
+        $gzdata = gzcompress(json_encode($data));
+        fputs($handle, $gzdata);
+        rewind($handle);
+        $this->data = $handle;
         return $this;
     }
 
@@ -208,6 +212,7 @@ class Profiling
      */
     public function getData()
     {
-        return $this->data;
+        return json_decode(gzuncompress(stream_get_contents($this->data)), true);
+        //return $this->data;
     }
 }
