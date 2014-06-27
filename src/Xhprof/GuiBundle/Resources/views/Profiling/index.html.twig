@@ -33,19 +33,19 @@
                             <tbody>
                             <tr>
                                 <td><strong>Walltime</strong></td>
-                                <td>{{ profiling.getWallTime }}</td>
+                                <td class="text-right">{{ profiling.getWallTime }}</td>
                             </tr>
                             <tr>
                                 <td><strong>CPU</strong></td>
-                                <td>{{ profiling.getCpu }}</td>
+                                <td class="text-right">{{ profiling.getCpu }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Memory</strong></td>
-                                <td>{{ profiling.getMemory }}</td>
+                                <td class="text-right">{{ profiling.getMemory }}</td>
                             </tr>
                             <tr>
                                 <td><strong>Peak Memory</strong></td>
-                                <td>{{ profiling.getPeakMemory }}</td>
+                                <td class="text-right">{{ profiling.getPeakMemory }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -115,11 +115,11 @@
                         {% for function, data in data %}
                             <tr>
                                 <td>{{ function }}</td>
-                                <td>{{ data.ct }}</td>
-                                <td>{{ data.wt }}</td>
-                                <td>{{ data.cpu }}</td>
-                                <td>{{ data.mu }}</td>
-                                <td>{{ data.pmu }}</td>
+                                <td class="text-right">{{ data.ct }}</td>
+                                <td class="text-right">{{ data.wt }}</td>
+                                <td class="text-right">{{ data.cpu }}</td>
+                                <td class="text-right">{{ data.mu }}</td>
+                                <td class="text-right">{{ data.pmu }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
