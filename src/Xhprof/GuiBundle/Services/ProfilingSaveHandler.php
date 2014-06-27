@@ -42,13 +42,16 @@ class ProfilingSaveHandler extends ContainerAware {
         $profiling->setPeakMemory($main['cpu']);
         $profiling->setTimestamp(new \DateTime());
         $profiling->setWallTime($main['wt']);
+        $profiling->setRequestUri($_SERVER['REQUEST_URI']);
+        $profiling->setRequestMethod($_SERVER['REQUEST_METHOD']);
+        $profiling->setGetParams($_GET);
+        $profiling->setPostParams($_POST);
+        $profiling->setCookiesParams($_COOKIE);
+        $profiling->setServerName($_SERVER['SERVER_NAME']);
 
         $em = $this->container->get('doctrine')->getEntityManager();
-
         $em->persist($profiling);
         $em->flush();
-
-        //fclose($handle);
     }
 
 } 
