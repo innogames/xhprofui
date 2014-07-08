@@ -11,4 +11,4 @@
 /composer.phar
 /atlassian-ide-plugin.xml
 /.idea
-/.DS_Store
+.DS_Store
