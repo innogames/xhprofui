@@ -49,7 +49,7 @@ class ProfilingSaveHandler extends ContainerAware {
         $profiling->setCookiesParams($_COOKIE);
         $profiling->setServerName($_SERVER['SERVER_NAME']);
 
-        $em = $this->container->get('doctrine')->getEntityManager();
+        $em = $this->container->get('doctrine')->getManager();
         $em->persist($profiling);
         $em->flush();
     }
