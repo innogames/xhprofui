@@ -12,11 +12,13 @@ class ProfilingController extends Controller
      * Show a single profiling in detail
      *
      * @param integer $id the profiling id
+     * @param string $sort_by_metrics
+     * @param string $sort_direction
      *
      * @throws \InvalidArgumentException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($id)
+    public function showAction($id, $sort_by_metrics, $sort_direction)
     {
         if (!is_numeric($id)) {
             throw new \InvalidArgumentException('Invalid id given, numeric value expected!');
@@ -28,7 +30,7 @@ class ProfilingController extends Controller
         if ($profiling) {
             $data = $profiling->getData();
             $parser = new DataParser();
-            $parsed_data = $parser->parse($data);
+            $parsed_data = $parser->parse($data, $sort_by_metrics, $sort_direction);
         }
 
         return $this->render(
