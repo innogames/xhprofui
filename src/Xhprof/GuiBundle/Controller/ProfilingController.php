@@ -4,6 +4,7 @@ namespace Xhprof\GuiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Xhprof\GuiBundle\Entity\ProfilingRepository;
+use Xhprof\GuiBundle\Model\DataParser;
 
 class ProfilingController extends Controller
 {
@@ -26,22 +27,13 @@ class ProfilingController extends Controller
         $data = null;
         if ($profiling) {
             $data = $profiling->getData();
-            // sort by walltime, temporary solution
-            uasort(
-                $data,
-                function ($a, $b) {
-                    if ($a['wt'] == $b['wt']) {
-                        return 0;
-                    }
-
-                    return ($a['wt'] < $b['wt']) ? 1 : -1;
-                }
-            );
+            $parser = new DataParser();
+            $parsed_data = $parser->parse($data);
         }
 
         return $this->render(
             'XhprofGuiBundle:Profiling:show.html.twig',
-            array('profiling' => $profiling, 'data' => $data)
+            array('profiling' => $profiling, 'data' => $parsed_data)
         );
     }
 
