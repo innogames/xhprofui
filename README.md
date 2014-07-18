@@ -33,10 +33,10 @@ Provide an integration of XHPROF and a GUI which is
 
 ## Features
 
-    Different Storage Providers (Not only Postgres)
+    Different Storage Providers (Starting with Postgres, later Mysql, MongoDB, etc.)
     Multi-Language
-    Installer or Package (PHAR?)
-    As small as possible
+    Installer or Package (i.e. PHAR)
+    As small as possible (but still use existing frameworks and utilities)
 
 
 Here is a screenshot of one profiling page:
