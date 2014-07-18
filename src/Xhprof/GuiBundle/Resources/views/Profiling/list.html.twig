@@ -17,7 +17,7 @@
         {% for profiling in profilings %}
             <tr>
                 <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a></td>
-                <td>timestamp</td>
+                <td>{{ profiling.getTimestamp().format('Y-m-d H:i:s') }}</td>
                 <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a>
                 </td>
                 <td>{{ profiling.getServerName }}</td>
