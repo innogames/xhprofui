@@ -1,8 +1,8 @@
 {
     "name": "XHProfUI",
-    "license": "MIT",
+    "license": "GPLv2",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "A GUI for XHProf",
     "autoload": {
         "psr-0": { "": "src/" }
     },
