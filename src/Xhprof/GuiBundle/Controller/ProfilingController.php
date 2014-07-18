@@ -44,7 +44,7 @@ class ProfilingController extends Controller
         $doctrine = $this->get('doctrine');
         /** @var ProfilingRepository $repository */
         $repository = $doctrine->getRepository('XhprofGuiBundle:Profiling');
-        $profilings = $repository->findAll();
+        $profilings = $repository->findBy(array(), array('timestamp' => 'DESC'));
         return $this->render('XhprofGuiBundle:Profiling:list.html.twig', array('profilings' => $profilings));
     }
 
