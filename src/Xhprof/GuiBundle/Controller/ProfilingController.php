@@ -3,6 +3,7 @@
 namespace Xhprof\GuiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Xhprof\GuiBundle\Entity\ProfilingRepository;
 use Xhprof\GuiBundle\Model\DataParser;
 
@@ -39,13 +40,24 @@ class ProfilingController extends Controller
         );
     }
 
-    public function listAction()
+    public function listAction(Request $request)
     {
+        $locale = $request->getLocale();
+
         $doctrine = $this->get('doctrine');
         /** @var ProfilingRepository $repository */
         $repository = $doctrine->getRepository('XhprofGuiBundle:Profiling');
         $profilings = $repository->findBy(array(), array('timestamp' => 'DESC'));
-        return $this->render('XhprofGuiBundle:Profiling:list.html.twig', array('profilings' => $profilings));
+
+        $session = $request->getSession();
+        $last_accessed = $session->get('last_accessed', null);
+        $output = $this->render('XhprofGuiBundle:Profiling:list.html.twig', [
+            'profilings' => $profilings,
+            'last_accessed' => $last_accessed
+        ]);
+
+        $session->set('last_accessed', date('Y-m-d H:i:s'));
+        return $output;
     }
 
     public function testAction()

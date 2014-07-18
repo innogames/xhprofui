@@ -1,6 +1,6 @@
 {% extends 'XhprofGuiBundle::layout.html.twig' %}
 
-{% block title %}Profiling{% endblock %}
+{% block title %}{% trans %}Profiling{% endtrans %}{% endblock %}
 
 {% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
 
@@ -8,21 +8,21 @@
     <div class="col-lg-8">
         <div class="panel panel-default panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">General</h3>
+                <h3 class="panel-title">{% trans %}General</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <tbody>
                         <tr>
-                            <td class="info_table_header"><strong>Server Name</strong></td>
+                            <td class="info_table_header"><strong>{% trans %}Server Name{% endtrans %}</strong></td>
                             <td>{{ profiling.getServerName }}</td>
                         </tr>
                         <tr>
-                            <td class="info_table_header"><strong>Script</strong></td>
+                            <td class="info_table_header"><strong>{% trans %}Script{% endtrans %}</strong></td>
                             <td>{{ profiling.getRequestUri }}</td>
                         </tr>
                         <tr>
-                            <td class="info_table_header"><strong>Request Method</strong></td>
+                            <td class="info_table_header"><strong>{% trans %}Request Method{% endtrans %}</strong></td>
                             <td>{{ profiling.getRequestMethod }}</td>
                         </tr>
                     </tbody>
@@ -33,24 +33,24 @@
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Profiling data</h3>
+                        <h3 class="panel-title">{% trans %}Profiling data{% endtrans %}</h3>
                     </div>
                     <div class="panel-body">
                         <table class="table table-condensed">
                             <tr>
-                                <td class="info_table_header"><strong>Walltime</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}Walltime{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getWallTime|number_format }} microsecs</td>
                             </tr>
                             <tr>
-                                <td class="info_table_header"><strong>CPU</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}CPU{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getCpu|number_format }} cycles</td>
                             </tr>
                             <tr>
-                                <td class="info_table_header"><strong>Memory</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}Memory{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getMemory|number_format }} bytes</td>
                             </tr>
                             <tr>
-                                <td class="info_table_header"><strong>Peak Memory</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}Peak Memory{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getPeakMemory|number_format }} bytes</td>
                             </tr>
                         </table>
@@ -62,7 +62,7 @@
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Request</h3>
+                <h3 class="panel-title">{% trans %}Request{% endtrans %}</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
@@ -115,16 +115,16 @@
             <table class="table table-condensed table-striped">
                 <thead>
                 <tr>
-                    <th>Function</th>
-                    <th class="text-right">Calls</th>
-                    <th class="text-right">Incl. Wall Time (microsec)</th>
-                    <th class="text-right">Excl. Wall Time (microsec)</th>
-                    <th class="text-right">Incl. CPU (cycles)</th>
-                    <th class="text-right">Excl. CPU (cycles)</th>
-                    <th class="text-right">Incl. Memory</th>
-                    <th class="text-right">Excl. Memory</th>
-                    <th class="text-right">Incl. Peak Memory</th>
-                    <th class="text-right">Excl. Peak Memory</th>
+                    <th>{% trans %}Function{% endtrans %}</th>
+                    <th class="text-right">{% trans %}Calls{% endtrans %}</th>
+                    <th class="text-right">{% trans %}Incl. Wall Time (microsec){% endtrans %}</th>
+                    <th class="text-right">{% trans %}Excl. Wall Time (microsec){% endtrans %}</th>
+                    <th class="text-right">{% trans %}Incl. CPU (cycles){% endtrans %}</th>
+                    <th class="text-right">{% trans %}Excl. CPU (cycles){% endtrans %}</th>
+                    <th class="text-right">{% trans %}Incl. Memory{% endtrans %}</th>
+                    <th class="text-right">{% trans %}Excl. Memory{% endtrans %}</th>
+                    <th class="text-right">{% trans %}Incl. Peak Memory{% endtrans %}</th>
+                    <th class="text-right">{% trans %}Excl. Peak Memory{% endtrans %}</th>
                 </tr>
                 </thead>
                 <tbody>
