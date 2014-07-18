@@ -38,7 +38,8 @@ Provide an integration of XHPROF and a GUI which is
     Installer or Package (i.e. PHAR)
     As small as possible (but still use existing frameworks and utilities)
 
+## Screenshots
 
-Here is a screenshot of one profiling page (WIP):
+### Profiling page
 
 ![](screenshots/profiling-view-wip.png)
