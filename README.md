@@ -39,6 +39,6 @@ Provide an integration of XHPROF and a GUI which is
     As small as possible (but still use existing frameworks and utilities)
 
 
-Here is a screenshot of one profiling page:
+Here is a screenshot of one profiling page (WIP):
 
 ![](screenshots/profiling-view-wip.png)
