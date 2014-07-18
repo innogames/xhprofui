@@ -16,6 +16,11 @@ class DataParser
     const METRIC_MEMORY_USAGE = 'mu';
     const METRIC_PEAK_MEMORY_USAGE = 'pmu';
 
+    const METRIC_EXCL_WALL_TIME = 'excl_wt';
+    const METRIC_EXCL_CPU = 'excl_cpu';
+    const METRIC_EXCL_MEMORY_USAGE = 'excl_mu';
+    const METRIC_EXCL_PEAK_MEMORY_USAGE = 'excl_pmu';
+
     /**
      * all available metric keys
      *
@@ -27,6 +32,17 @@ class DataParser
         self::METRIC_CPU,
         self::METRIC_MEMORY_USAGE,
         self::METRIC_PEAK_MEMORY_USAGE
+    ];
+
+    /**
+     * map of inclusive metrics to exclusive ones
+     * @var array
+     */
+    private $exclusive_metrics = [
+        self::METRIC_WALL_TIME         => self::METRIC_EXCL_WALL_TIME,
+        self::METRIC_CPU               => self::METRIC_EXCL_CPU,
+        self::METRIC_MEMORY_USAGE      => self::METRIC_EXCL_MEMORY_USAGE,
+        self::METRIC_PEAK_MEMORY_USAGE => self::METRIC_EXCL_PEAK_MEMORY_USAGE
     ];
 
     /**
@@ -73,6 +89,22 @@ class DataParser
                 /* update inclusive times/metric for this child  */
                 foreach ($this->metrics as $metric) {
                     $parsed_data[$child][$metric] += $row[$metric];
+                }
+            }
+        }
+
+        foreach ($parsed_data as $child => $data) {
+            foreach ($this->exclusive_metrics as $incl_metric => $excl_metric) {
+                $parsed_data[$child][$excl_metric] = $data[$incl_metric];
+            }
+        }
+
+        foreach ($raw_data as $function_name => $row) {
+            list($parent, $child) = $this->splitFunctionName($function_name);
+
+            foreach ($this->exclusive_metrics as $incl_metric => $excl_metric) {
+                if (isset($parsed_data[$parent])) {
+                    $parsed_data[$parent][$excl_metric] -= $row[$incl_metric];
                 }
             }
 
