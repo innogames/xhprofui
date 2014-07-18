@@ -1,9 +1,9 @@
 parameters:
-    database_driver:   pdo_mysql
+    database_driver:   pdo_pgsql
     database_host:     127.0.0.1
     database_port:     ~
-    database_name:     symfony
-    database_user:     root
+    database_name:     xhprofui
+    database_user:     xhprofui
     database_password: ~
 
     locale:            en
