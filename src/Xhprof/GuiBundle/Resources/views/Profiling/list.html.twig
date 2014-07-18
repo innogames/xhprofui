@@ -3,29 +3,35 @@
 {% block title %}Profilings list{% endblock %}
 
 {% block content %}
-    <table class="table table-condensed">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Timestamp</th>
-            <th>Script</th>
-            <th>Server</th>
-            <th>Walltime</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for profiling in profilings %}
-            <tr>
-                <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a></td>
-                <td>{{ profiling.getTimestamp().format('Y-m-d H:i:s') }}</td>
-                <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a>
-                </td>
-                <td>{{ profiling.getServerName }}</td>
-                <td>{{ profiling.getWalltime }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="panel panel-default panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">All profilings</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Timestamp</th>
+                    <th>Script</th>
+                    <th>Server</th>
+                    <th>Walltime</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for profiling in profilings %}
+                    <tr>
+                        <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a></td>
+                        <td>{{ profiling.getTimestamp().format('Y-m-d H:i:s') }}</td>
+                        <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a>
+                        </td>
+                        <td>{{ profiling.getServerName }}</td>
+                        <td>{{ profiling.getWalltime }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
 

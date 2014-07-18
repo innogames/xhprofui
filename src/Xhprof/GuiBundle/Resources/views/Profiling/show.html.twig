@@ -2,123 +2,148 @@
 
 {% block title %}Profiling{% endblock %}
 
+{% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
+
 {% block content %}
-    <div class="row">
-        <div class="col-md-8">
-            <table class="table table-condensed">
-                <tbody>
-                <tr>
-                    <td><strong>Server Name</strong></td>
-                    <td>{{ profiling.getServerName }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Script</strong></td>
-                    <td>{{ profiling.getRequestUri }}</td>
-                </tr>
-                <tr>
-                    <td><strong>Request Method</strong></td>
-                    <td>{{ profiling.getRequestMethod }}</td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-condensed">
-                        <tbody>
+    <div class="col-lg-8">
+        <div class="panel panel-default panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">General</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <tbody>
                         <tr>
-                            <td><strong>Walltime</strong></td>
-                            <td class="text-right">{{ profiling.getWallTime }}</td>
+                            <td class="info_table_header"><strong>Server Name</strong></td>
+                            <td>{{ profiling.getServerName }}</td>
                         </tr>
                         <tr>
-                            <td><strong>CPU</strong></td>
-                            <td class="text-right">{{ profiling.getCpu }}</td>
+                            <td class="info_table_header"><strong>Script</strong></td>
+                            <td>{{ profiling.getRequestUri }}</td>
                         </tr>
                         <tr>
-                            <td><strong>Memory</strong></td>
-                            <td class="text-right">{{ profiling.getMemory }}</td>
+                            <td class="info_table_header"><strong>Request Method</strong></td>
+                            <td>{{ profiling.getRequestMethod }}</td>
                         </tr>
-                        <tr>
-                            <td><strong>Peak Memory</strong></td>
-                            <td class="text-right">{{ profiling.getPeakMemory }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profiling data</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-condensed">
+                            <tr>
+                                <td class="info_table_header"><strong>Walltime</strong></td>
+                                <td class="text-right">{{ profiling.getWallTime|number_format }} microsecs</td>
+                            </tr>
+                            <tr>
+                                <td class="info_table_header"><strong>CPU</strong></td>
+                                <td class="text-right">{{ profiling.getCpu|number_format }} cycles</td>
+                            </tr>
+                            <tr>
+                                <td class="info_table_header"><strong>Memory</strong></td>
+                                <td class="text-right">{{ profiling.getMemory|number_format }} bytes</td>
+                            </tr>
+                            <tr>
+                                <td class="info_table_header"><strong>Peak Memory</strong></td>
+                                <td class="text-right">{{ profiling.getPeakMemory|number_format }} bytes</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <table class="table table-condensed">
-                <tbody>
-                <tr>
-                    <td><strong>GET</strong></td>
-                    <td>
-                        <table class="table table-striped">
-                            {% for key, param in profiling.getGetParams %}
-                                <tr>
-                                    <td>{{ key }}</td>
-                                    <td>{{ param }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>POST</strong></td>
-                    <td>
-                        <table class="table table-striped">
-                            {% for key, param in profiling.getPostParams %}
-                                <tr>
-                                    <td>{{ key }}</td>
-                                    <td>{{ param }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td><strong>COOKIE</strong></td>
-                    <td>
-                        <table class="table table-striped">
-                            {% for key, param in profiling.getCookiesParams %}
-                                <tr>
-                                    <td>{{ key }}</td>
-                                    <td>{{ param }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Request</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <td class="info_table_header"><strong>GET</strong></td>
+                        <td>
+                            <table class="table table-striped">
+                                {% for key, param in profiling.getGetParams %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ param }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="info_table_header"><strong>POST</strong></td>
+                        <td>
+                            <table class="table table-striped">
+                                {% for key, param in profiling.getPostParams %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ param }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="info_table_header"><strong>COOKIE</strong></td>
+                        <td>
+                            <table class="table table-striped">
+                                {% for key, param in profiling.getCookiesParams %}
+                                    <tr>
+                                        <td>{{ key }}</td>
+                                        <td>{{ param }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
             <table class="table table-condensed table-striped">
                 <thead>
                 <tr>
                     <th>Function</th>
-                    <th>ct</th>
-                    <th>wt</th>
-                    <th>cpu</th>
-                    <th>mu</th>
-                    <th>pmu</th>
+                    <th class="text-right">Calls</th>
+                    <th class="text-right">Incl. Wall Time (microsec)</th>
+                    <th class="text-right">Excl. Wall Time (microsec)</th>
+                    <th class="text-right">Incl. CPU (cycles)</th>
+                    <th class="text-right">Excl. CPU (cycles)</th>
+                    <th class="text-right">Incl. Memory</th>
+                    <th class="text-right">Excl. Memory</th>
+                    <th class="text-right">Incl. Peak Memory</th>
+                    <th class="text-right">Excl. Peak Memory</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for function, data in data %}
                     <tr>
                         <td>{{ function }}</td>
-                        <td class="text-right">{{ data.ct }}</td>
-                        <td class="text-right">{{ data.wt }}</td>
-                        <td class="text-right">{{ data.cpu }}</td>
-                        <td class="text-right">{{ data.mu }}</td>
-                        <td class="text-right">{{ data.pmu }}</td>
+                        <td class="text-right">{{ data.ct|number_format }}</td>
+                        <td class="text-right">{{ data.wt|number_format }}</td>
+                        <td class="text-right">{{ data.excl_wt|number_format }}</td>
+                        <td class="text-right">{{ data.cpu|number_format }}</td>
+                        <td class="text-right">{{ data.excl_cpu|number_format }}</td>
+                        <td class="text-right">{{ data.mu|number_format }}</td>
+                        <td class="text-right">{{ data.excl_mu|number_format }}</td>
+                        <td class="text-right">{{ data.pmu|number_format }}</td>
+                        <td class="text-right">{{ data.excl_pmu|number_format }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-    </div>
 {% endblock %}
 
