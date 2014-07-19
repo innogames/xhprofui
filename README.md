@@ -22,6 +22,12 @@ So I decided to start a new project to create a nice clean GUI with the best cod
 
 With this project I also would like to learn new stuff, so I'll have to find a way to combine both.
 
+The GUI is based on 
+
+ * Symfony2
+ * Doctrine
+ * Twig Templating Engine
+
 ## GOALS
 
 Provide an integration of XHPROF and a GUI which is
@@ -33,9 +39,9 @@ Provide an integration of XHPROF and a GUI which is
 
 ## Features
 
-    Different Storage Providers (Starting with Postgres, later Mysql, MongoDB, etc.)
-    Multi-Language
-    Installer or Package (i.e. PHAR)
+    Different Storage Providers, starting with PDO (Mysql, Postgres, ...), MongoDB, etc.)
+    Multi-Language-Support
+    Installer or Package (i.e. PHAR) for easy integration in existing pojects
     As small as possible (but still use existing frameworks and utilities)
 
 ## Screenshots
