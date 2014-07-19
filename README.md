@@ -1,5 +1,3 @@
-My goal is to create a highly customizable web based GUI for XHPROF Profiling results.
-
 ## What is XHPROF?
 
 XHPROF is a profiler extension for PHP, originally developed by Facebook and published as open source.
@@ -37,9 +35,9 @@ Provide an integration of XHPROF and a GUI which is
     Easy to extend
     Easy to install
 
-## Features
+## Intended Features
 
-    Different Storage Providers, starting with PDO (Mysql, Postgres, ...), MongoDB, etc.)
+    Different Storage Providers (Mysql, Postgres, MongoDB, etc.)
     Multi-Language-Support
     Installer or Package (i.e. PHAR) for easy integration in existing pojects
     As small as possible (but still use existing frameworks and utilities)
