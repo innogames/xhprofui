@@ -1,5 +1,3 @@
-My goal is to create a highly customizable web based GUI for XHPROF Profiling results.
-
 ## What is XHPROF?
 
 XHPROF is a profiler extension for PHP, originally developed by Facebook and published as open source.
@@ -22,6 +20,12 @@ So I decided to start a new project to create a nice clean GUI with the best cod
 
 With this project I also would like to learn new stuff, so I'll have to find a way to combine both.
 
+The GUI is based on 
+
+ * Symfony2 (https://github.com/symfony/symfony)
+ * Doctrine (https://github.com/doctrine/doctrine2)
+ * Twig Templating Engine (https://github.com/fabpot/Twig)
+
 ## GOALS
 
 Provide an integration of XHPROF and a GUI which is
@@ -31,11 +35,11 @@ Provide an integration of XHPROF and a GUI which is
     Easy to extend
     Easy to install
 
-## Features
+## Intended Features
 
-    Different Storage Providers (Starting with Postgres, later Mysql, MongoDB, etc.)
-    Multi-Language
-    Installer or Package (i.e. PHAR)
+    Different Storage Providers (Mysql, Postgres, MongoDB, etc.)
+    Multi-Language-Support
+    Installer or Package (i.e. PHAR) for easy integration in existing pojects
     As small as possible (but still use existing frameworks and utilities)
 
 ## Screenshots
