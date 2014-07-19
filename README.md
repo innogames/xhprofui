@@ -24,9 +24,9 @@ With this project I also would like to learn new stuff, so I'll have to find a w
 
 The GUI is based on 
 
- * Symfony2
- * Doctrine
- * Twig Templating Engine
+ * Symfony2 (https://github.com/symfony/symfony)
+ * Doctrine (https://github.com/doctrine/doctrine2)
+ * Twig Templating Engine (https://github.com/fabpot/Twig)
 
 ## GOALS
 
