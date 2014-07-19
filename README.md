@@ -27,6 +27,7 @@ The GUI is based on
  * Symfony2 (https://github.com/symfony/symfony)
  * Doctrine (https://github.com/doctrine/doctrine2)
  * Twig Templating Engine (https://github.com/fabpot/Twig)
+ * Bootstrap (https://github.com/twbs/bootstrap)
 
 ## GOALS
 
