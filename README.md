@@ -44,6 +44,8 @@ Provide an integration of XHPROF and a GUI which is
 
 ## Screenshots
 
+Here I will present some screenshots.
+
 ### Profiling page
 
 ![](screenshots/profiling-view-wip.png)
