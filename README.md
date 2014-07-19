@@ -1,3 +1,5 @@
+Travis Build: [![Build Status](https://travis-ci.org/derschatta/xhprofui.svg?branch=master)](https://travis-ci.org/derschatta/xhprofui)
+
 ## What is XHPROF?
 
 XHPROF is a profiler extension for PHP, originally developed by Facebook and published as open source.
