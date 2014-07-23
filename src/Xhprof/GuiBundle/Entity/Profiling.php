@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Profiling
  *
- * @ORM\Table()
+ * @ORM\Table(name="profiling")
  * @ORM\Entity(repositoryClass="Xhprof\GuiBundle\Entity\ProfilingRepository")
  */
 class Profiling

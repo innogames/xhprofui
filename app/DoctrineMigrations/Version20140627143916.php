@@ -31,11 +31,11 @@ class Version20140627143916 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "postgresql", "Migration can only be executed safely on 'postgresql'.");
         
-        $this->addSql("ALTER TABLE Profiling DROP server_name");
-        $this->addSql("ALTER TABLE Profiling DROP request_uri");
-        $this->addSql("ALTER TABLE Profiling DROP request_method");
-        $this->addSql("ALTER TABLE Profiling DROP get_params");
-        $this->addSql("ALTER TABLE Profiling DROP post_params");
-        $this->addSql("ALTER TABLE Profiling DROP cookies_params");
+        $this->addSql("ALTER TABLE profiling DROP server_name");
+        $this->addSql("ALTER TABLE profiling DROP request_uri");
+        $this->addSql("ALTER TABLE profiling DROP request_method");
+        $this->addSql("ALTER TABLE profiling DROP get_params");
+        $this->addSql("ALTER TABLE profiling DROP post_params");
+        $this->addSql("ALTER TABLE profiling DROP cookies_params");
     }
 }

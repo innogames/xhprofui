@@ -16,7 +16,7 @@ class Version20140704155427 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != "postgresql", "Migration can only be executed safely on 'postgresql'.");
         
         $this->addSql("ALTER TABLE profiling_data ALTER profiling_id DROP NOT NULL");
-        $this->addSql("ALTER TABLE profiling_data ADD CONSTRAINT FK_A35636EA43FED25D FOREIGN KEY (profiling_id) REFERENCES Profiling (id) NOT DEFERRABLE INITIALLY IMMEDIATE");
+        $this->addSql("ALTER TABLE profiling_data ADD CONSTRAINT FK_A35636EA43FED25D FOREIGN KEY (profiling_id) REFERENCES profiling (id) NOT DEFERRABLE INITIALLY IMMEDIATE");
         $this->addSql("CREATE INDEX IDX_A35636EA43FED25D ON profiling_data (profiling_id)");
     }
 
