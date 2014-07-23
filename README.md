@@ -1,3 +1,5 @@
+Travis Build: [![Build Status](https://travis-ci.org/derschatta/xhprofui.svg?branch=master)](https://travis-ci.org/derschatta/xhprofui)
+
 ## What is XHPROF?
 
 XHPROF is a profiler extension for PHP, originally developed by Facebook and published as open source.
@@ -25,6 +27,7 @@ The GUI is based on
  * Symfony2 (https://github.com/symfony/symfony)
  * Doctrine (https://github.com/doctrine/doctrine2)
  * Twig Templating Engine (https://github.com/fabpot/Twig)
+ * Bootstrap (https://github.com/twbs/bootstrap)
 
 ## GOALS
 
