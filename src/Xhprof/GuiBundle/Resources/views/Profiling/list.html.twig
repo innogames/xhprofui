@@ -22,11 +22,11 @@
                 {% for profiling in profilings %}
                     <tr>
                         <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getId }}</a>{% if last_accessed != null %}{% if profiling.getTimestamp().format('Y-m-d H:i:s') > last_accessed %} <span class="label label-success">{% trans %}New{% endtrans %}</span>{% endif %}{% endif %}</td>
-                        <td>{{ profiling.getTimestamp().format('Y-m-d H:i:s') }}</td>
+                        <td>{{ profiling.getTimestamp()|localizeddate('medium', 'medium') }}</td>
                         <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a>
                         </td>
                         <td>{{ profiling.getServerName }}</td>
-                        <td>{{ profiling.getWalltime }}</td>
+                        <td>{{ profiling.getWalltime|number_format }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -1,8 +1,8 @@
 {% extends 'XhprofGuiBundle::layout.html.twig' %}
 
 {% block title %}{% trans %}Profiling{% endtrans %}{% endblock %}
-
 {% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
+{% block subtitle_right %}{{ profiling.getTimestamp()|localizeddate('medium', 'medium') }}{% endblock %}
 
 {% block content %}
     <div class="col-lg-8">

@@ -42,8 +42,6 @@ class ProfilingController extends Controller
 
     public function listAction(Request $request)
     {
-        $locale = $request->getLocale();
-
         $doctrine = $this->get('doctrine');
         /** @var ProfilingRepository $repository */
         $repository = $doctrine->getRepository('XhprofGuiBundle:Profiling');
