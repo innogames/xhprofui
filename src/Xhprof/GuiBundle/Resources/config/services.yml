@@ -5,4 +5,10 @@ services:
     xhprof.profiling.save.handler:
          class:        "%xhprof.profiling.save.handler.class%"
          calls:
-                      - [setContainer, ["@service_container"]]
+              - [setDoctrine, ["@doctrine"]]
+    kernel.listener.number_formatter:
+            class: Xhprof\GuiBundle\EventListener\NumberFormatterListener
+            calls:
+               - [setTwig, ["@twig"]]
+            tags:
+                - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

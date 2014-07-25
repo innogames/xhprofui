@@ -6,6 +6,8 @@ use Xhprof\GuiBundle\Entity\Profiling;
 
 class ProfilingSaveHandler extends ContainerAware {
 
+    private $doctrine;
+
     /**
      * register the profiling save handler
      *
@@ -15,6 +17,15 @@ class ProfilingSaveHandler extends ContainerAware {
     {
         xhprof_enable(XHPROF_FLAGS_NO_BUILTINS | XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
         register_shutdown_function(array($this, 'shutdownFunction'));
+    }
+
+    /**
+     * sets the doctrine service
+     *
+     * @param $doctrine
+     */
+    public function setDoctrine($doctrine) {
+        $this->doctrine = $doctrine;
     }
 
     /**
@@ -49,7 +60,7 @@ class ProfilingSaveHandler extends ContainerAware {
         $profiling->setCookiesParams($_COOKIE);
         $profiling->setServerName($_SERVER['SERVER_NAME']);
 
-        $em = $this->container->get('doctrine')->getManager();
+        $em = $this->doctrine->getManager();
         $em->persist($profiling);
         $em->flush();
     }
