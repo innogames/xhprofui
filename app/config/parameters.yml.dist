@@ -1,5 +1,7 @@
 parameters:
     database_driver:   pdo_pgsql
+    # uncomment path and comment host and port if you want to use sqlite
+    # database_path: "%kernel.root_dir%/data/data.db3"
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     xhprofui
