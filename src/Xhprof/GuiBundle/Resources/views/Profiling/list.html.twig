@@ -26,7 +26,7 @@
                         <td><a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{{ profiling.getRequestUri }}</a>
                         </td>
                         <td>{{ profiling.getServerName }}</td>
-                        <td>{{ profiling.getWalltime|number_format }}</td>
+                        <td>{{ profiling.getWalltime|localizednumber }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -39,19 +39,19 @@
                         <table class="table table-condensed">
                             <tr>
                                 <td class="info_table_header"><strong>{% trans %}Walltime{% endtrans %}</strong></td>
-                                <td class="text-right">{{ profiling.getWallTime|number_format }} microsecs</td>
+                                <td class="text-right">{{ profiling.getWallTime|localizednumber }} microsecs</td>
                             </tr>
                             <tr>
                                 <td class="info_table_header"><strong>{% trans %}CPU{% endtrans %}</strong></td>
-                                <td class="text-right">{{ profiling.getCpu|number_format }} cycles</td>
+                                <td class="text-right">{{ profiling.getCpu|localizednumber }} cycles</td>
                             </tr>
                             <tr>
                                 <td class="info_table_header"><strong>{% trans %}Memory{% endtrans %}</strong></td>
-                                <td class="text-right">{{ profiling.getMemory|number_format }} bytes</td>
+                                <td class="text-right">{{ profiling.getMemory|localizednumber }} bytes</td>
                             </tr>
                             <tr>
                                 <td class="info_table_header"><strong>{% trans %}Peak Memory{% endtrans %}</strong></td>
-                                <td class="text-right">{{ profiling.getPeakMemory|number_format }} bytes</td>
+                                <td class="text-right">{{ profiling.getPeakMemory|localizednumber }} bytes</td>
                             </tr>
                         </table>
                     </div>
@@ -131,15 +131,15 @@
                 {% for function, data in data %}
                     <tr>
                         <td>{{ function }}</td>
-                        <td class="text-right">{{ data.ct|number_format }}</td>
-                        <td class="text-right">{{ data.wt|number_format }}</td>
-                        <td class="text-right">{{ data.excl_wt|number_format }}</td>
-                        <td class="text-right">{{ data.cpu|number_format }}</td>
-                        <td class="text-right">{{ data.excl_cpu|number_format }}</td>
-                        <td class="text-right">{{ data.mu|number_format }}</td>
-                        <td class="text-right">{{ data.excl_mu|number_format }}</td>
-                        <td class="text-right">{{ data.pmu|number_format }}</td>
-                        <td class="text-right">{{ data.excl_pmu|number_format }}</td>
+                        <td class="text-right">{{ data.ct|localizednumber }}</td>
+                        <td class="text-right">{{ data.wt|localizednumber }}</td>
+                        <td class="text-right">{{ data.excl_wt|localizednumber }}</td>
+                        <td class="text-right">{{ data.cpu|localizednumber }}</td>
+                        <td class="text-right">{{ data.excl_cpu|localizednumber }}</td>
+                        <td class="text-right">{{ data.mu|localizednumber }}</td>
+                        <td class="text-right">{{ data.excl_mu|localizednumber }}</td>
+                        <td class="text-right">{{ data.pmu|localizednumber }}</td>
+                        <td class="text-right">{{ data.excl_pmu|localizednumber }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
