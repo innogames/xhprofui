@@ -5,6 +5,8 @@ namespace Xhprof\GuiBundle\Tests;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -36,27 +38,15 @@ class MyWebTestCase extends WebTestCase
      */
     private function createDatabase() {
         if (self::$db_created === false) {
-            $application = new Application(self::$kernel);
-            $application->setAutoExit(false);
-            $this->executeCommand($application, "doctrine:schema:drop", ["--force" => '']);
-            $this->executeCommand($application, "doctrine:schema:create");
+            $container = self::$kernel->getContainer();
+            /** @var EntityManager $em */
+            $em = $container->get('doctrine')->getManager();
+            $meta = $em->getMetadataFactory()->getAllMetadata();
+            $tool = new SchemaTool($em);
+            $tool->dropDatabase();
+            $tool->createSchema($meta);
             self::$db_created = true;
         }
-    }
-
-    /**
-     * executes a normal console command
-     *
-     * @param Application $application
-     * @param string $command the command to execute
-     * @param array $options additional options
-     */
-    private function executeCommand($application, $command, Array $options = array()) {
-        $options["--env"] = "test";
-        $options["--quiet"] = true;
-        $options = array_merge($options, array('command' => $command));
-
-        $application->run(new ArrayInput($options));
     }
 
     /**
@@ -69,6 +59,7 @@ class MyWebTestCase extends WebTestCase
         $loader = new Loader();
         $loader->loadFromDirectory($path);
         $container = self::$kernel->getContainer();
+        /** @var EntityManager $em */
         $em = $container->get('doctrine')->getManager();
         $purger = new ORMPurger($em);
         $executor = new ORMExecutor($em, $purger);
