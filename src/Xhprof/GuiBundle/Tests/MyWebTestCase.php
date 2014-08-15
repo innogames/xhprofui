@@ -7,10 +7,7 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class MyWebTestCase extends WebTestCase
 {
@@ -26,21 +23,23 @@ class MyWebTestCase extends WebTestCase
         parent::setUp();
 
         self::bootKernel(['environment' => 'test', 'debug' => true]);
+        $container = self::$kernel->getContainer();
+        /** @var EntityManager $em */
+        $em = $container->get('doctrine')->getManager();
 
-        $this->createDatabase();
-        $this->loadFixtures();
+        $this->createDatabase($em);
+        $this->loadFixtures($em);
     }
 
     /**
      * initially create the database
      *
+     * @param EntityManager $em
+     *
      * @return void
      */
-    private function createDatabase() {
+    private function createDatabase(EntityManager $em) {
         if (self::$db_created === false) {
-            $container = self::$kernel->getContainer();
-            /** @var EntityManager $em */
-            $em = $container->get('doctrine')->getManager();
             $meta = $em->getMetadataFactory()->getAllMetadata();
             $tool = new SchemaTool($em);
             $tool->dropDatabase();
@@ -52,15 +51,14 @@ class MyWebTestCase extends WebTestCase
     /**
      * purge database and load fixtures
      *
+     * @param EntityManager $em
+     *
      * @return void
      */
-    private function loadFixtures() {
+    private function loadFixtures(EntityManager $em) {
         $path = self::$kernel->locateResource('@XhprofGuiBundle/Tests/Fixtures/');
         $loader = new Loader();
         $loader->loadFromDirectory($path);
-        $container = self::$kernel->getContainer();
-        /** @var EntityManager $em */
-        $em = $container->get('doctrine')->getManager();
         $purger = new ORMPurger($em);
         $executor = new ORMExecutor($em, $purger);
         $executor->execute($loader->getFixtures());
