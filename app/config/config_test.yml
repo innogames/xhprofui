@@ -1,6 +1,19 @@
 imports:
     - { resource: config_dev.yml }
 
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "pdo_sqlite"
+        dbname:   "xhprofui"
+        path:     "%kernel.root_dir%/data/test.db3"
+        #memory:   true
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+
 framework:
     test: ~
     session:
