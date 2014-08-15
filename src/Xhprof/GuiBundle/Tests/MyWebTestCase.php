@@ -12,6 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class MyWebTestCase extends WebTestCase
 {
 
+    const FIXTURE_PATH_LOOKUP = '@XhprofGuiBundle/Tests/Fixtures/';
+
     private static $db_created = false;
 
     /**
@@ -56,7 +58,7 @@ class MyWebTestCase extends WebTestCase
      * @return void
      */
     private function loadFixtures(EntityManager $em) {
-        $path = self::$kernel->locateResource('@XhprofGuiBundle/Tests/Fixtures/');
+        $path = self::$kernel->locateResource(self::FIXTURE_PATH_LOOKUP);
         $loader = new Loader();
         $loader->loadFromDirectory($path);
         $purger = new ORMPurger($em);
