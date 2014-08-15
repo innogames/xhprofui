@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class MyWebTestCase extends WebTestCase
 {
 
-    const FIXTURE_PATH_LOOKUP = '@XhprofGuiBundle/Tests/Fixtures/';
+    const FIXTURE_PATH_LOOKUP = '@XhprofGuiBundle/Tests/DataFixtures/';
 
     private static $db_created = false;
 
