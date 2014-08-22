@@ -19,6 +19,17 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     * test partial
+     *
+     * @return void
+     */
+    public function testParsingPartial() {
+        $parser = new DataParser();
+        $result = $parser->parsePartial($this->getTestData(), 'foo');
+        $this->assertInternalType('array', $result);
+    }
+
+    /**
      * get sample test data, used the sample from the xhprof package
      *
      * @return array

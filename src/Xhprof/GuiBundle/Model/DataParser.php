@@ -45,6 +45,8 @@ class DataParser
         self::METRIC_PEAK_MEMORY_USAGE => self::METRIC_EXCL_PEAK_MEMORY_USAGE
     ];
 
+    private $parsed_data = array();
+
     /**
      * parse and returns the data sorted by the given metric and direction
      *
@@ -77,6 +79,37 @@ class DataParser
         $parsed_data = $this->parseExclusiveMetrics($raw_data, $parsed_data);
 
         return $this->sortDataByMetric($parsed_data, $sort_by_metric, $sort_direction);
+    }
+
+    /**
+     * parse only a part ot show a specific method and it's parents and children
+     *
+     * @param array  $raw_data
+     * @param string $key
+     * @param string $sort_by_metric
+     * @param string $sort_direction
+     *
+     * @return array
+     */
+    public function parsePartial($raw_data, $key, $sort_by_metric = null, $sort_direction = null) {
+        $parsed_data = $this->parse($raw_data ,$sort_by_metric, $sort_direction);
+
+        $result = [
+            'current' => array(
+                $key => $parsed_data[$key]
+            ),
+            'parents' => array(),
+            'children' => array()
+        ];
+        foreach ($raw_data as $function_name => $row) {
+            list($parent, $child) = $this->splitFunctionName($function_name);
+            if ($parent == $key) {
+                $result['children'][$child] = $parsed_data[$child];
+            } elseif ($child == $key) {
+                $result['parents'][$parent] = $parsed_data[$parent];
+            }
+        }
+        return $result;
     }
 
     /**
