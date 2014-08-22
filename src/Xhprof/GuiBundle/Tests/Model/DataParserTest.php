@@ -24,6 +24,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
      * @return void
      */
     public function testParsingPartial() {
+        $this->markTestIncomplete('assertions missing');
         $parser = new DataParser();
         $result = $parser->parsePartial($this->getTestData(), 'foo');
         $this->assertInternalType('array', $result);
