@@ -1,27 +1,49 @@
-<pre><?php
+<?php
 
-use Symfony\Component\Debug\Debug;
+function bar($x) {
+    if ($x > 0) {
+        bar($x - 1);
+    }
+}
 
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
-Debug::enable();
+function foo() {
+    for ($idx = 0; $idx < 5; $idx++) {
+        bar($idx);
+        $x = strlen("abc");
+    }
+}
 
-require_once __DIR__.'/../app/AppKernel.php';
-$kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
-$kernel->boot();
-$myservice = $kernel->getContainer()->get('xhprof.profiling.save.handler');
-$myservice->register();
+// start profiling
+xhprof_enable(XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
 
-echo "test";
+// run program
+foo();
 
-//$xhprof_data = xhprof_disable();
-//var_dump($xhprof_data);
-//$myservice->save($xhprof_data);
+// stop profiler
+$xhprof_data = xhprof_disable();
 
-$doctrine = $kernel->getContainer()->get('doctrine');
-/** @var Xhprof\StoreBundle\Entity\Profiling $profiling */
-$profiling = $doctrine->getRepository('XhprofGuiBundle:Profiling')
-    ->find(10);
 
-$resource = $profiling->getData();
-var_dump(json_decode(gzuncompress(stream_get_contents($resource)), true));
+echo "<pre>";
+
+// display raw xhprof data for the profiler run
+print_r($xhprof_data);
+
+
+$XHPROF_ROOT = realpath(dirname(__FILE__) .'/../vendor/facebook/xhprof');
+include_once $XHPROF_ROOT . "/xhprof_lib/utils/xhprof_lib.php";
+include_once $XHPROF_ROOT . "/xhprof_lib/utils/xhprof_runs.php";
+
+// save raw data for this profiler run using default
+// implementation of iXHProfRuns.
+$xhprof_runs = new XHProfRuns_Default();
+
+// save the run under a namespace "xhprof_foo"
+$run_id = $xhprof_runs->save_run($xhprof_data, "xhprof_foo");
+
+echo "---------------\n".
+    "Assuming you have set up the http based UI for \n".
+    "XHProf at some address, you can view run at \n".
+    "http://xhprof.localhost/index.php?run=$run_id&source=xhprof_foo\n".
+    "---------------\n";
+
+echo "</pre>";

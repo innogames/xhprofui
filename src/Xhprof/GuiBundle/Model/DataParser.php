@@ -73,42 +73,8 @@ class DataParser
             throw new InvalidArgumentException('unknown sorting direction given!');
         }
 
-        $parsed_data = [];
-        foreach ($raw_data as $function_name => $row) {
-            list($parent, $child) = $this->splitFunctionName($function_name);
-
-            if (!isset($parsed_data[$child])) {
-                $parsed_data[$child] = array(self::METRIC_COUNT => $row[self::METRIC_COUNT]);
-                foreach ($this->metrics as $metric) {
-                    $parsed_data[$child][$metric] = $row[$metric];
-                }
-            } else {
-                /* increment call count for this child */
-                $parsed_data[$child][self::METRIC_COUNT] += $row[self::METRIC_COUNT];
-
-                /* update inclusive times/metric for this child  */
-                foreach ($this->metrics as $metric) {
-                    $parsed_data[$child][$metric] += $row[$metric];
-                }
-            }
-        }
-
-        foreach ($parsed_data as $child => $data) {
-            foreach ($this->exclusive_metrics as $incl_metric => $excl_metric) {
-                $parsed_data[$child][$excl_metric] = $data[$incl_metric];
-            }
-        }
-
-        foreach ($raw_data as $function_name => $row) {
-            list($parent, $child) = $this->splitFunctionName($function_name);
-
-            foreach ($this->exclusive_metrics as $incl_metric => $excl_metric) {
-                if (isset($parsed_data[$parent])) {
-                    $parsed_data[$parent][$excl_metric] -= $row[$incl_metric];
-                }
-            }
-
-        }
+        $parsed_data = $this->parseInclusiveMetrics($raw_data);
+        $parsed_data = $this->parseExclusiveMetrics($raw_data, $parsed_data);
 
         return $this->sortDataByMetric($parsed_data, $sort_by_metric, $sort_direction);
     }
@@ -156,6 +122,70 @@ class DataParser
         );
 
         return $data;
+    }
+
+    /**
+     * parse and calculate the inclusive metrics
+     *
+     * @param array $raw_data
+     *
+     * @return array
+     */
+    private function parseInclusiveMetrics(array $raw_data)
+    {
+        $parsed_data = [];
+        foreach ($raw_data as $function_name => $row) {
+            list($parent, $child) = $this->splitFunctionName($function_name);
+
+            if (!isset($parsed_data[$child])) {
+                $parsed_data[$child] = array(self::METRIC_COUNT => $row[self::METRIC_COUNT]);
+                foreach ($this->metrics as $metric) {
+                    $parsed_data[$child][$metric] = $row[$metric];
+                }
+            } else {
+                // increment call count for this child
+                $parsed_data[$child][self::METRIC_COUNT] += $row[self::METRIC_COUNT];
+
+                // update inclusive times/metric for this child
+                foreach ($this->metrics as $metric) {
+                    $parsed_data[$child][$metric] += $row[$metric];
+                }
+            }
+        }
+
+        return $parsed_data;
+    }
+
+    /**
+     * calculate the exclusive metrics
+     *
+     * @param array $raw_data
+     * @param array $parsed_data
+     *
+     * @return mixed
+     */
+    private function parseExclusiveMetrics(array $raw_data, array $parsed_data)
+    {
+        // first set all exclusive metrics to the inclusive as default
+        foreach ($parsed_data as $child => $data) {
+            foreach ($this->exclusive_metrics as $incl_metric => $excl_metric) {
+                $parsed_data[$child][$excl_metric] = $data[$incl_metric];
+            }
+        }
+
+        foreach ($raw_data as $function_name => $row) {
+            list($parent, $child) = $this->splitFunctionName($function_name);
+
+            // reduce the metrics from the parent
+            foreach ($this->exclusive_metrics as $incl_metric => $excl_metric) {
+                if (isset($parsed_data[$parent])) {
+                    $parsed_data[$parent][$excl_metric] -= $row[$incl_metric];
+                }
+            }
+
+        }
+
+        return $parsed_data;
     }
 
 } 
