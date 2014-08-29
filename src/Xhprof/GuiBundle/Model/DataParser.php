@@ -86,23 +86,27 @@ class DataParser
      * parse only a part ot show a specific method and it's parents and children
      *
      * @param array  $raw_data
-     * @param string $key
+     * @param string $id
      * @param string $sort_by_metric
      * @param string $sort_direction
      *
      * @return array
      */
-    public function parsePartial($raw_data, $key, $sort_by_metric = null, $sort_direction = null)
+    public function parsePartial($raw_data, $id, $sort_by_metric = null, $sort_direction = null)
     {
         $parsed_data = $this->parse($raw_data, $sort_by_metric, $sort_direction);
+        // search the current data with the id
+        $current = $this->findById($id, $parsed_data);
 
         $result = [
-            'current' => array(
-                $key => $parsed_data[$key]
-            ),
+            'current' => $current,
             'parents' => array(),
             'children' => array()
         ];
+
+        // get the name of the current function from the data
+        $key = array_pop(array_keys($current));
+
         foreach ($raw_data as $function_name => $row) {
             list($parent, $child) = $this->splitFunctionName($function_name);
             if ($parent == $key) {
@@ -253,5 +257,24 @@ class DataParser
         }
 
         return $parsed_data;
+    }
+
+    /**
+     * find data by id
+     *
+     * @param string $id the hash id
+     * @param array $parsed_data the data to search in
+     *
+     * @return array
+     */
+    private function findById($id, array $parsed_data)
+    {
+        foreach ($parsed_data as $key => $data) {
+            if ($data['id'] == $id) {
+                return [$key => $data];
+            }
+        }
+
+        return [];
     }
 }
