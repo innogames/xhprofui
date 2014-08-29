@@ -66,7 +66,7 @@ class ProfilingController extends Controller
             $data = $profiling->getData();
             $parser = new DataParser();
             $parsed_data = $parser->parsePartial($data, $function_id, $sort_by_metrics, $sort_direction);
-            $function_name = DataParser::getNameById($function_id, $parsed_data['current']);
+            $function_name = DataParser::findNameById($function_id, $parsed_data['current']);
         }
 
         return $this->render(
@@ -75,6 +75,13 @@ class ProfilingController extends Controller
         );
     }
 
+    /**
+     * list all profilings
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction(Request $request)
     {
         $doctrine = $this->get('doctrine');
@@ -93,6 +100,11 @@ class ProfilingController extends Controller
         return $output;
     }
 
+    /**
+     * just a test action to create a new profiling
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function testAction()
     {
         return $this->render('XhprofGuiBundle:Profiling:test.html.twig', array());

@@ -33,7 +33,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase
         $result = $parser->parsePartial($this->getTestData(), $hashed_name);
         $this->assertInternalType('array', $result);
 
-        $this->assertEquals('foo', DataParser::getNameById($hashed_name, $result['current']));
+        $this->assertEquals('foo', DataParser::findNameById($hashed_name, $result['current']));
 
         $this->assertArrayHasKey('children', $result);
         $this->assertArrayHasKey('parents', $result);

@@ -127,7 +127,7 @@ class DataParser
      *
      * @return string
      */
-    public static function getNameById($id, array $parsed_data)
+    public static function findNameById($id, array $parsed_data)
     {
         foreach ($parsed_data as $key => $data) {
             if ($data['id'] == $id) {
