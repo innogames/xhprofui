@@ -75,7 +75,8 @@ class DataParser
             throw new InvalidArgumentException('unknown sorting direction given!');
         }
 
-        $parsed_data = $this->parseInclusiveMetrics($raw_data);
+        $parsed_data = $this->prepareData($raw_data);
+        $parsed_data = $this->parseInclusiveMetrics($raw_data, $parsed_data);
         $parsed_data = $this->parseExclusiveMetrics($raw_data, $parsed_data);
 
         return $this->sortDataByMetric($parsed_data, $sort_by_metric, $sort_direction);
@@ -91,8 +92,9 @@ class DataParser
      *
      * @return array
      */
-    public function parsePartial($raw_data, $key, $sort_by_metric = null, $sort_direction = null) {
-        $parsed_data = $this->parse($raw_data ,$sort_by_metric, $sort_direction);
+    public function parsePartial($raw_data, $key, $sort_by_metric = null, $sort_direction = null)
+    {
+        $parsed_data = $this->parse($raw_data, $sort_by_metric, $sort_direction);
 
         $result = [
             'current' => array(
@@ -110,6 +112,18 @@ class DataParser
             }
         }
         return $result;
+    }
+
+    /**
+     * hash the function name
+     *
+     * @param string $function_name
+     *
+     * @return integer
+     */
+    public static function hashFunctionName($function_name)
+    {
+        return hash('crc32', $function_name);
     }
 
     /**
@@ -158,20 +172,40 @@ class DataParser
     }
 
     /**
-     * parse and calculate the inclusive metrics
+     * prepare data
      *
      * @param array $raw_data
      *
      * @return array
      */
-    private function parseInclusiveMetrics(array $raw_data)
+    private function prepareData(array $raw_data)
     {
         $parsed_data = [];
         foreach ($raw_data as $function_name => $row) {
             list($parent, $child) = $this->splitFunctionName($function_name);
-
             if (!isset($parsed_data[$child])) {
-                $parsed_data[$child] = array(self::METRIC_COUNT => $row[self::METRIC_COUNT]);
+                $parsed_data[$child] = [];
+                $parsed_data[$child]['id'] = self::hashFunctionName($child);
+            }
+        }
+        return $parsed_data;
+    }
+
+    /**
+     * parse and calculate the inclusive metrics
+     *
+     * @param array $raw_data
+     * @param array $parsed_data
+     *
+     * @return array
+     */
+    private function parseInclusiveMetrics(array $raw_data, array $parsed_data = array())
+    {
+        foreach ($raw_data as $function_name => $row) {
+            list($parent, $child) = $this->splitFunctionName($function_name);
+
+            if (!isset($parsed_data[$child]) || !isset($parsed_data[$child][self::METRIC_COUNT])) {
+                $parsed_data[$child][self::METRIC_COUNT] = $row[self::METRIC_COUNT];
                 foreach ($this->metrics as $metric) {
                     $parsed_data[$child][$metric] = $row[$metric];
                 }
@@ -220,5 +254,4 @@ class DataParser
 
         return $parsed_data;
     }
-
-} 
+}

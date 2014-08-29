@@ -4,14 +4,16 @@ namespace Xhprof\GuiBundle\Tests\Model;
 
 use Xhprof\GuiBundle\Model\DataParser;
 
-class DataParserTest extends \PHPUnit_Framework_TestCase {
+class DataParserTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * parse data
      *
      * @return void
      */
-    public function testParsingCompleteSet() {
+    public function testParsingCompleteSet()
+    {
         $parser = new DataParser();
         $result = $parser->parse($this->getTestData());
         $this->assertInternalType('array', $result);
@@ -23,7 +25,8 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
      *
      * @return void
      */
-    public function testParsingPartial() {
+    public function testParsingPartial()
+    {
         $parser = new DataParser();
         $result = $parser->parsePartial($this->getTestData(), 'foo');
         $this->assertInternalType('array', $result);
@@ -50,7 +53,8 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
      *
      * @return array
      */
-    private function getTestData() {
+    private function getTestData()
+    {
         return array(
             'foo==>bar' => array(
                 'ct' => 5,
@@ -118,9 +122,16 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
         );
     }
 
-    private function getExpectedData() {
+    /**
+     * get the data which is expected
+     *
+     * @return array
+     */
+    private function getExpectedData()
+    {
         return array(
             'main()' => array(
+                'id' => DataParser::hashFunctionName('main()'),
                 'ct' => 1,
                 'wt' => 811,
                 'cpu' => 809,
@@ -132,6 +143,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'foo' => array(
+                'id' => DataParser::hashFunctionName('foo'),
                 'ct' => 1,
                 'wt' => 544,
                 'cpu' => 546,
@@ -143,6 +155,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'bar' => array(
+                'id' => DataParser::hashFunctionName('bar'),
                 'ct' => 5,
                 'wt' => 257,
                 'cpu' => 409,
@@ -154,6 +167,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'bar@1' => array(
+                'id' => DataParser::hashFunctionName('bar@1'),
                 'ct' => 4,
                 'wt' => 58,
                 'cpu' => 62,
@@ -165,6 +179,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'bar@2' => array(
+                'id' => DataParser::hashFunctionName('bar@2'),
                 'ct' => 3,
                 'wt' => 22,
                 'cpu' => 25,
@@ -176,6 +191,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'strlen' => array(
+                'id' => DataParser::hashFunctionName('strlen'),
                 'ct' => 5,
                 'wt' => 20,
                 'cpu' => 25,
@@ -187,6 +203,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'bar@3' => array(
+                'id' => DataParser::hashFunctionName('bar@3'),
                 'ct' => 2,
                 'wt' => 10,
                 'cpu' => 13,
@@ -198,6 +215,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'bar@4' => array(
+                'id' => DataParser::hashFunctionName('bar@4'),
                 'ct' => 1,
                 'wt' => 2,
                 'cpu' => 4,
@@ -209,6 +227,7 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             ),
             'xhprof_disable' => array(
+                'id' => DataParser::hashFunctionName('xhprof_disable'),
                 'ct' => 1,
                 'wt' => 1,
                 'cpu' => 2,
@@ -231,11 +250,10 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
      *
      * @return void
      */
-    protected function assertArrayHasKeyHasValue($expected_key, $expected_value, array $array) {
+    protected function assertArrayHasKeyHasValue($expected_key, $expected_value, array $array)
+    {
         $this->assertArrayHasKey($expected_key, $array);
         $content = $array[$expected_key];
         $this->assertEquals($expected_value, $content);
     }
-
 }
- 
