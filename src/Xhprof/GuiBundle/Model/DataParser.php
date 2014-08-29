@@ -94,6 +94,15 @@ class DataParser
      */
     public function parsePartial($raw_data, $id, $sort_by_metric = null, $sort_direction = null)
     {
+        if ($sort_by_metric === null) {
+            $sort_by_metric = self::METRIC_WALL_TIME;
+        }
+        if ($sort_direction === null) {
+            $sort_direction = self::SORT_DESC;
+        }
+        $sort_by_metric = strtolower($sort_by_metric);
+        $sort_direction = strtoupper($sort_direction);
+
         $parsed_data = $this->parse($raw_data, $sort_by_metric, $sort_direction);
         // search the current data with the id
         $current = $this->findById($id, $parsed_data);
@@ -116,6 +125,14 @@ class DataParser
                 $result['parents'][$parent] = $parsed_data[$parent];
             }
         }
+
+        if (!empty($result['parents'])) {
+            $result['parents'] = $this->sortDataByMetric($result['parents'], $sort_by_metric, $sort_direction);
+        }
+        if (!empty($result['children'])) {
+            $result['children'] = $this->sortDataByMetric($result['children'], $sort_by_metric, $sort_direction);
+        }
+
         return $result;
     }
 
