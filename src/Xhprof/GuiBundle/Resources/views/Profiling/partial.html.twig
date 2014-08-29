@@ -6,7 +6,8 @@
 
 {% block content %}
     <div class="col-lg-12">
-        <h4 class="lead">Details for function <mark>{{ function_name }}</mark></h4>
+        <a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{% trans %}Back to overview{% endtrans %}</a>
+        <h4 class="lead">{% trans %}Details for function{% endtrans %} <u>{{ function_name }}</u></h4>
     </div>
     <div class="col-lg-12">
         <table class="table table-condensed table-striped">
