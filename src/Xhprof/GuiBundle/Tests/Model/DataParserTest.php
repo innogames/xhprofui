@@ -27,9 +27,13 @@ class DataParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParsingPartial()
     {
+        $hashed_name = DataParser::hashFunctionName('foo');
+
         $parser = new DataParser();
-        $result = $parser->parsePartial($this->getTestData(), DataParser::hashFunctionName('foo'));
+        $result = $parser->parsePartial($this->getTestData(), $hashed_name);
         $this->assertInternalType('array', $result);
+
+        $this->assertEquals('foo', DataParser::getNameById($hashed_name, $result['current']));
 
         $this->assertArrayHasKey('children', $result);
         $this->assertArrayHasKey('parents', $result);

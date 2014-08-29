@@ -40,6 +40,41 @@ class ProfilingController extends Controller
         );
     }
 
+    /**
+     * Show a single profiling in detail
+     *
+     * @param integer $id the profiling id
+     * @param string  $function_id
+     * @param string  $sort_by_metrics
+     * @param string  $sort_direction
+     *
+     * @throws \InvalidArgumentException
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function partialAction($id, $function_id, $sort_by_metrics, $sort_direction)
+    {
+        if (!is_numeric($id)) {
+            throw new \InvalidArgumentException('Invalid id given, numeric value expected!');
+        }
+        $doctrine = $this->get('doctrine');
+        $profiling = $doctrine->getRepository('XhprofGuiBundle:Profiling')
+            ->find($id);
+        $data = null;
+        $parsed_data = [];
+        $function_name = '';
+        if ($profiling) {
+            $data = $profiling->getData();
+            $parser = new DataParser();
+            $parsed_data = $parser->parsePartial($data, $function_id, $sort_by_metrics, $sort_direction);
+            $function_name = DataParser::getNameById($function_id, $parsed_data['current']);
+        }
+
+        return $this->render(
+            'XhprofGuiBundle:Profiling:partial.html.twig',
+            array('function_name' => $function_name, 'profiling' => $profiling, 'data' => $parsed_data)
+        );
+    }
+
     public function listAction(Request $request)
     {
         $doctrine = $this->get('doctrine');

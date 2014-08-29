@@ -105,17 +105,37 @@ class DataParser
         ];
 
         // get the name of the current function from the data
-        $key = array_pop(array_keys($current));
+        $keys = array_keys($current);
+        $key = array_pop($keys);
 
         foreach ($raw_data as $function_name => $row) {
             list($parent, $child) = $this->splitFunctionName($function_name);
-            if ($parent == $key) {
+            if ($parent == $key && isset($parsed_data[$child])) {
                 $result['children'][$child] = $parsed_data[$child];
-            } elseif ($child == $key) {
+            } elseif ($child == $key && isset($parsed_data[$parent])) {
                 $result['parents'][$parent] = $parsed_data[$parent];
             }
         }
         return $result;
+    }
+
+    /**
+     * get the cleartext name for given id
+     *
+     * @param integer $id
+     * @param array $parsed_data
+     *
+     * @return string
+     */
+    public static function getNameById($id, array $parsed_data)
+    {
+        foreach ($parsed_data as $key => $data) {
+            if ($data['id'] == $id) {
+                return $key;
+            }
+        }
+
+        return '';
     }
 
     /**

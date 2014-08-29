@@ -128,18 +128,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for function, data in data %}
+                {% for function, row in data %}
                     <tr>
-                        <td>{{ function }}</td>
-                        <td class="text-right">{{ data.ct|localizednumber }}</td>
-                        <td class="text-right">{{ data.wt|localizednumber }}</td>
-                        <td class="text-right">{{ data.excl_wt|localizednumber }}</td>
-                        <td class="text-right">{{ data.cpu|localizednumber }}</td>
-                        <td class="text-right">{{ data.excl_cpu|localizednumber }}</td>
-                        <td class="text-right">{{ data.mu|localizednumber }}</td>
-                        <td class="text-right">{{ data.excl_mu|localizednumber }}</td>
-                        <td class="text-right">{{ data.pmu|localizednumber }}</td>
-                        <td class="text-right">{{ data.excl_pmu|localizednumber }}</td>
+                        <td><a href="{{ path('xhprof_gui_partial', {'id': profiling.getId, 'function_id': row.id}) }}">{{ function }}</a></td>
+                        <td class="text-right">{{ row.ct|localizednumber }}</td>
+                        <td class="text-right">{{ row.wt|localizednumber }}</td>
+                        <td class="text-right">{{ row.excl_wt|localizednumber }}</td>
+                        <td class="text-right">{{ row.cpu|localizednumber }}</td>
+                        <td class="text-right">{{ row.excl_cpu|localizednumber }}</td>
+                        <td class="text-right">{{ row.mu|localizednumber }}</td>
+                        <td class="text-right">{{ row.excl_mu|localizednumber }}</td>
+                        <td class="text-right">{{ row.pmu|localizednumber }}</td>
+                        <td class="text-right">{{ row.excl_pmu|localizednumber }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

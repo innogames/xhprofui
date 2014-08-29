@@ -1,6 +1,9 @@
 xhprof_gui_list:
     pattern:  /profilings
     defaults: { _controller: XhprofGuiBundle:Profiling:list }
+xhprof_gui_partial:
+    pattern:  /profilings/{id}/partial/{function_id}/{sort_by_metrics}/{sort_direction}
+    defaults: { _controller: XhprofGuiBundle:Profiling:partial, sort_by_metrics: null, sort_direction: null }
 xhprof_gui_show:
     pattern:  /profilings/{id}/{sort_by_metrics}/{sort_direction}
     defaults: { _controller: XhprofGuiBundle:Profiling:show, sort_by_metrics: null, sort_direction: null }

@@ -1,0 +1,93 @@
+{% extends 'XhprofGuiBundle::layout.html.twig' %}
+
+{% block title %}{% trans %}Profiling{% endtrans %}{% endblock %}
+{% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
+{% block subtitle_right %}{{ profiling.getTimestamp()|localizeddate('medium', 'medium') }}{% endblock %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <h4 class="lead">Details for function <mark>{{ function_name }}</mark></h4>
+    </div>
+    <div class="col-lg-12">
+        <table class="table table-condensed table-striped">
+            <thead>
+            <tr>
+                <th>{% trans %}Function{% endtrans %}</th>
+                <th class="text-right">{% trans %}Calls{% endtrans %}</th>
+                <th class="text-right">{% trans %}Incl. Wall Time (microsec){% endtrans %}</th>
+                <th class="text-right">{% trans %}Excl. Wall Time (microsec){% endtrans %}</th>
+                <th class="text-right">{% trans %}Incl. CPU (cycles){% endtrans %}</th>
+                <th class="text-right">{% trans %}Excl. CPU (cycles){% endtrans %}</th>
+                <th class="text-right">{% trans %}Incl. Memory{% endtrans %}</th>
+                <th class="text-right">{% trans %}Excl. Memory{% endtrans %}</th>
+                <th class="text-right">{% trans %}Incl. Peak Memory{% endtrans %}</th>
+                <th class="text-right">{% trans %}Excl. Peak Memory{% endtrans %}</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="success">
+                    <th colspan="10">{% trans %}Current function{% endtrans %}</th>
+                </tr>
+            {% for function, row in data.current %}
+                <tr>
+                    <td><a href="{{ path('xhprof_gui_partial', {'id': profiling.getId, 'function_id': row.id}) }}">{{ function }}</a></td>
+                    <td class="text-right">{{ row.ct|localizednumber }}</td>
+                    <td class="text-right">{{ row.wt|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_wt|localizednumber }}</td>
+                    <td class="text-right">{{ row.cpu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_cpu|localizednumber }}</td>
+                    <td class="text-right">{{ row.mu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_mu|localizednumber }}</td>
+                    <td class="text-right">{{ row.pmu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_pmu|localizednumber }}</td>
+                </tr>
+            {% endfor %}
+                <tr class="active">
+                    <th colspan="10"></th>
+                </tr>
+            {%  if data.parents|length > 0 %}
+                <tr class="success">
+                    <th colspan="10">{% trans %}Parent function{% endtrans %}</th>
+                </tr>
+            {% for function, row in data.parents %}
+                <tr>
+                    <td><a href="{{ path('xhprof_gui_partial', {'id': profiling.getId, 'function_id': row.id}) }}">{{ function }}</a></td>
+                    <td class="text-right">{{ row.ct|localizednumber }}</td>
+                    <td class="text-right">{{ row.wt|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_wt|localizednumber }}</td>
+                    <td class="text-right">{{ row.cpu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_cpu|localizednumber }}</td>
+                    <td class="text-right">{{ row.mu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_mu|localizednumber }}</td>
+                    <td class="text-right">{{ row.pmu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_pmu|localizednumber }}</td>
+                </tr>
+            {% endfor %}
+                <tr class="active">
+                    <th colspan="10"></th>
+                </tr>
+            {% endif %}
+            {%  if data.children|length > 0 %}
+                <tr class="success">
+                    <th colspan="10">{% trans %}Child function{% endtrans %}</th>
+                </tr>
+            {% for function, row in data.children %}
+                <tr>
+                    <td><a href="{{ path('xhprof_gui_partial', {'id': profiling.getId, 'function_id': row.id}) }}">{{ function }}</a></td>
+                    <td class="text-right">{{ row.ct|localizednumber }}</td>
+                    <td class="text-right">{{ row.wt|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_wt|localizednumber }}</td>
+                    <td class="text-right">{{ row.cpu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_cpu|localizednumber }}</td>
+                    <td class="text-right">{{ row.mu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_mu|localizednumber }}</td>
+                    <td class="text-right">{{ row.pmu|localizednumber }}</td>
+                    <td class="text-right">{{ row.excl_pmu|localizednumber }}</td>
+                </tr>
+            {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
