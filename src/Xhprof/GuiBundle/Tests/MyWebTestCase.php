@@ -21,7 +21,8 @@ class MyWebTestCase extends WebTestCase
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
 
         self::bootKernel(['environment' => 'test', 'debug' => true]);
@@ -40,7 +41,8 @@ class MyWebTestCase extends WebTestCase
      *
      * @return void
      */
-    private function createDatabase(EntityManager $em) {
+    private function createDatabase(EntityManager $em)
+    {
         if (self::$db_created === false) {
             $meta = $em->getMetadataFactory()->getAllMetadata();
             $tool = new SchemaTool($em);
@@ -57,7 +59,8 @@ class MyWebTestCase extends WebTestCase
      *
      * @return void
      */
-    private function loadFixtures(EntityManager $em) {
+    private function loadFixtures(EntityManager $em)
+    {
         $path = self::$kernel->locateResource(self::FIXTURE_PATH_LOOKUP);
         $loader = new Loader();
         $loader->loadFromDirectory($path);
@@ -65,5 +68,4 @@ class MyWebTestCase extends WebTestCase
         $executor = new ORMExecutor($em, $purger);
         $executor->execute($loader->getFixtures());
     }
-
-} 
+}

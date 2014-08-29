@@ -4,7 +4,8 @@ namespace Xhprof\GuiBundle\Services;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Xhprof\GuiBundle\Entity\Profiling;
 
-class ProfilingSaveHandler extends ContainerAware {
+class ProfilingSaveHandler extends ContainerAware
+{
 
     private $doctrine;
 
@@ -24,7 +25,8 @@ class ProfilingSaveHandler extends ContainerAware {
      *
      * @param $doctrine
      */
-    public function setDoctrine($doctrine) {
+    public function setDoctrine($doctrine)
+    {
         $this->doctrine = $doctrine;
     }
 
@@ -64,5 +66,4 @@ class ProfilingSaveHandler extends ContainerAware {
         $em->persist($profiling);
         $em->flush();
     }
-
-} 
+}
