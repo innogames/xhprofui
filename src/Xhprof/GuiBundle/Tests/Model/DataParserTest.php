@@ -24,10 +24,25 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
      * @return void
      */
     public function testParsingPartial() {
-        $this->markTestIncomplete('assertions missing');
         $parser = new DataParser();
         $result = $parser->parsePartial($this->getTestData(), 'foo');
         $this->assertInternalType('array', $result);
+
+        $this->assertArrayHasKey('children', $result);
+        $this->assertArrayHasKey('parents', $result);
+        $this->assertArrayHasKey('current', $result);
+
+        $expected_data = $this->getExpectedData();
+
+        $current = $result['current'];
+        $this->assertArrayHasKeyHasValue('foo', $expected_data['foo'], $current);
+
+        $children = $result['children'];
+        $this->assertArrayHasKeyHasValue('bar', $expected_data['bar'], $children);
+        $this->assertArrayHasKeyHasValue('strlen', $expected_data['strlen'], $children);
+
+        $parents = $result['parents'];
+        $this->assertArrayHasKeyHasValue('main()', $expected_data['main()'], $parents);
     }
 
     /**
@@ -205,6 +220,21 @@ class DataParserTest extends \PHPUnit_Framework_TestCase {
                 'excl_pmu' => 0
             )
         );
+    }
+
+    /**
+     * assert that array has key and value
+     *
+     * @param mixed $expected_key
+     * @param mixed $expected_value
+     * @param array $array
+     *
+     * @return void
+     */
+    protected function assertArrayHasKeyHasValue($expected_key, $expected_value, array $array) {
+        $this->assertArrayHasKey($expected_key, $array);
+        $content = $array[$expected_key];
+        $this->assertEquals($expected_value, $content);
     }
 
 }
