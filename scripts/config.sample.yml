@@ -1,5 +1,9 @@
 # Xhprof Configuration
 xhprof:
+    profile:
+        cpu:         true
+        memory:      true
+        nobuiltins:  true
     database:
         driver:   "pdo_sqlite"
         # if using pdo_sqlite please deactivate host and port by using the #
