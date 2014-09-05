@@ -64,6 +64,10 @@ class ProfilingSaveHandler
     {
         $main = $xhprof_data['main()'];
 
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '-';
+        $request_method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '-';
+        $server_name = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '-';
+
         $profiling = new Profiling();
         $profiling->setData($xhprof_data);
         $profiling->setCpu($main['cpu']);
@@ -71,12 +75,12 @@ class ProfilingSaveHandler
         $profiling->setPeakMemory($main['pmu']);
         $profiling->setTimestamp(new \DateTime());
         $profiling->setWallTime($main['wt']);
-        $profiling->setRequestUri($_SERVER['REQUEST_URI']);
-        $profiling->setRequestMethod($_SERVER['REQUEST_METHOD']);
+        $profiling->setRequestUri($request_uri);
+        $profiling->setRequestMethod($request_method);
         $profiling->setGetParams($_GET);
         $profiling->setPostParams($_POST);
         $profiling->setCookiesParams($_COOKIE);
-        $profiling->setServerName($_SERVER['SERVER_NAME']);
+        $profiling->setServerName($server_name);
 
         $this->entity_manager->persist($profiling);
         $this->entity_manager->flush();
