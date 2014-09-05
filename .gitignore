@@ -11,7 +11,7 @@
 /scripts/vendor/
 /scripts/phar/
 /scripts/*.phar
-/scripts/composer.*
+/scripts/composer.lock
 /composer.phar
 /atlassian-ide-plugin.xml
 /.idea
