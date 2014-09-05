@@ -41,6 +41,6 @@ if (empty($xhprof_config['xhprof']['database'])) {
 // obtaining the entity manager
 $entity_manager = EntityManager::create($xhprof_config['xhprof']['database'], $doctrine_config);
 
-$handler = new ProfilingSaveHandler($xhprof_config);
+$handler = new ProfilingSaveHandler($xhprof_config['xhprof']);
 $handler->setDoctrineEntityManager($entity_manager);
 $handler->register();

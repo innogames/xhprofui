@@ -3,7 +3,11 @@ xhprof:
     profile:
         cpu:         true
         memory:      true
-        nobuiltins:  true
+        builtins:    false
+    options:
+        ignored_functions:
+            - "strlen"
+            - "call_user_func"
     database:
         driver:   "pdo_sqlite"
         # if using pdo_sqlite please deactivate host and port by using the #
