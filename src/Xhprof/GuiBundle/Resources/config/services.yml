@@ -5,4 +5,4 @@ services:
     xhprof.profiling.save.handler:
          class:        "%xhprof.profiling.save.handler.class%"
          calls:
-              - [setDoctrine, ["@doctrine"]]
+              - [setDoctrineEntityManager, [@doctrine.orm.entity_manager]]

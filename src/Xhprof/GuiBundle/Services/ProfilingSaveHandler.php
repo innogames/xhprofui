@@ -1,13 +1,16 @@
 <?php
 namespace Xhprof\GuiBundle\Services;
 
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Doctrine\ORM\EntityManager;
 use Xhprof\GuiBundle\Entity\Profiling;
 
-class ProfilingSaveHandler extends ContainerAware
+class ProfilingSaveHandler
 {
 
-    private $doctrine;
+    /**
+     * @var EntityManager
+     */
+    private $entity_manager;
 
     /**
      * register the profiling save handler
@@ -23,11 +26,11 @@ class ProfilingSaveHandler extends ContainerAware
     /**
      * sets the doctrine service
      *
-     * @param $doctrine
+     * @param EntityManager $entity_manager
      */
-    public function setDoctrine($doctrine)
+    public function setDoctrineEntityManager($entity_manager)
     {
-        $this->doctrine = $doctrine;
+        $this->entity_manager = $entity_manager;
     }
 
     /**
@@ -46,6 +49,7 @@ class ProfilingSaveHandler extends ContainerAware
      */
     private function save(array $xhprof_data)
     {
+        var_dump($xhprof_data);
         $main = $xhprof_data['main()'];
 
         $profiling = new Profiling();
@@ -62,8 +66,7 @@ class ProfilingSaveHandler extends ContainerAware
         $profiling->setCookiesParams($_COOKIE);
         $profiling->setServerName($_SERVER['SERVER_NAME']);
 
-        $em = $this->doctrine->getManager();
-        $em->persist($profiling);
-        $em->flush();
+        $this->entity_manager->persist($profiling);
+        $this->entity_manager->flush();
     }
 }
