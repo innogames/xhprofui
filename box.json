@@ -4,7 +4,10 @@
         "src/Xhprof/GuiBundle/Services",
         "scripts/vendor"
     ],
-    "stub": true,
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Json"
+    ],
     "main": "scripts/xhprof_handler.php",
-    "output": "scripts/xhprof_handler.phar"
+    "output": "scripts/xhprof_handler.phar",
+    "stub": "scripts/xhprof_handler_stub.php"
 }
