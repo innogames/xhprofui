@@ -13,6 +13,19 @@ class ProfilingSaveHandler
     private $entity_manager;
 
     /**
+     * @var array
+     */
+    private $config;
+
+    /**
+     * @param array $config
+     */
+    public function __construct(array $config = array())
+    {
+        $this->config = $config;
+    }
+
+    /**
      * register the profiling save handler
      *
      * @return void
