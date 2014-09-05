@@ -1,0 +1,13 @@
+# Xhprof Configuration
+xhprof:
+    database:
+        driver:   "pdo_sqlite"
+        # if using pdo_sqlite please deactivate host and port by using the #
+        #host:     "yourhost"
+        #port:     "yourport"
+        dbname:   "profiling"
+        user:     ""
+        password: ""
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the full path
+        # path:     "/full/path/to/sqlite/file"
