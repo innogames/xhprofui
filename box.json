@@ -1,0 +1,10 @@
+{
+    "directories": [
+        "src/Xhprof/GuiBundle/Entity",
+        "src/Xhprof/GuiBundle/Services",
+        "scripts/vendor"
+    ],
+    "stub": true,
+    "main": "scripts/xhprof_handler.php",
+    "output": "scripts/xhprof_handler.phar"
+}

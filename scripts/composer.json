@@ -1,0 +1,13 @@
+{
+    "name": "XHProfUI",
+    "license": "GPLv2",
+    "type": "project",
+    "description": "A GUI for XHProf",
+    "autoload": {
+        "psr-0": { "": "../src/" }
+    },
+    "require": {
+        "doctrine/orm": "~2.2,>=2.2.3",
+        "symfony/yaml": "~2.5"
+    }
+}
