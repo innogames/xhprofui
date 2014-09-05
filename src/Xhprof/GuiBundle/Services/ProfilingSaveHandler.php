@@ -49,7 +49,6 @@ class ProfilingSaveHandler
      */
     private function save(array $xhprof_data)
     {
-        var_dump($xhprof_data);
         $main = $xhprof_data['main()'];
 
         $profiling = new Profiling();
