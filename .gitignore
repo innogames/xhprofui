@@ -5,9 +5,13 @@
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /app/data/
-/build/
+/phar/
 /vendor/
 /bin/
+/scripts/vendor/
+/scripts/phar/
+/scripts/*.phar
+/scripts/composer.*
 /composer.phar
 /atlassian-ide-plugin.xml
 /.idea
