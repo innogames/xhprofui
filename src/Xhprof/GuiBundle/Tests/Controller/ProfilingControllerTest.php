@@ -17,8 +17,7 @@ class ProfilingControllerTest extends MyWebTestCase
         $client = static::createClient();
 
         $crawler = $client->request('GET', '/profilings');
-
-        $this->assertTrue($crawler->filter('html:contains("Profilings list")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("Profilings overview")')->count() > 0);
         $this->assertTrue($crawler->filter('html:contains("/my/test/uri")')->count() > 0);
     }
 }
