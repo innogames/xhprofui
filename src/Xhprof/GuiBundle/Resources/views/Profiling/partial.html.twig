@@ -1,33 +1,33 @@
 {% extends 'XhprofGuiBundle::layout.html.twig' %}
 
-{% block title %}{% trans %}Profiling{% endtrans %}{% endblock %}
+{% block title %}{% trans %}profiling{% endtrans %}{% endblock %}
 {% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
 {% block subtitle_right %}{{ profiling.getTimestamp()|localizeddate('medium', 'medium') }}{% endblock %}
 
 {% block content %}
     <div class="col-lg-12">
-        <a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{% trans %}Back to overview{% endtrans %}</a>
-        <h4 class="lead">{% trans %}Details for function{% endtrans %} <u>{{ function_name }}</u></h4>
+        <a href="{{ path('xhprof_gui_show', {'id': profiling.getId}) }}">{% trans %}back-to-overview{% endtrans %}</a>
+        <h4 class="lead">{% trans %}details-for-function{% endtrans %} <u>{{ function_name }}</u></h4>
     </div>
     <div class="col-lg-12">
         <table class="table table-condensed table-striped">
             <thead>
             <tr>
-                <th>{% trans %}Function{% endtrans %}</th>
-                <th class="text-right">{% trans %}Calls{% endtrans %}</th>
-                <th class="text-right">{% trans %}Incl. Wall Time (microsec){% endtrans %}</th>
-                <th class="text-right">{% trans %}Excl. Wall Time (microsec){% endtrans %}</th>
-                <th class="text-right">{% trans %}Incl. CPU (cycles){% endtrans %}</th>
-                <th class="text-right">{% trans %}Excl. CPU (cycles){% endtrans %}</th>
-                <th class="text-right">{% trans %}Incl. Memory{% endtrans %}</th>
-                <th class="text-right">{% trans %}Excl. Memory{% endtrans %}</th>
-                <th class="text-right">{% trans %}Incl. Peak Memory{% endtrans %}</th>
-                <th class="text-right">{% trans %}Excl. Peak Memory{% endtrans %}</th>
+                <th>{% trans %}col-function{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-calls{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-walltime{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-excl-walltime{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-cpu{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-excl-cpu{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-memory{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-excl-memory{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-peak-memory{% endtrans %}</th>
+                <th class="text-right">{% trans %}col-excl-peak-memory{% endtrans %}</th>
             </tr>
             </thead>
             <tbody>
                 <tr class="success">
-                    <th colspan="10">{% trans %}Current function{% endtrans %}</th>
+                    <th colspan="10">{% trans %}partial-current-function{% endtrans %}</th>
                 </tr>
             {% for function, row in data.current %}
                 <tr>
@@ -48,7 +48,7 @@
                 </tr>
             {%  if data.parents|length > 0 %}
                 <tr class="success">
-                    <th colspan="10">{% trans %}Parent function{% endtrans %}</th>
+                    <th colspan="10">{% trans %}partial-parent-function{% endtrans %}</th>
                 </tr>
             {% for function, row in data.parents %}
                 <tr>
@@ -70,7 +70,7 @@
             {% endif %}
             {%  if data.children|length > 0 %}
                 <tr class="success">
-                    <th colspan="10">{% trans %}Child function{% endtrans %}</th>
+                    <th colspan="10">{% trans %}partial-child-function{% endtrans %}</th>
                 </tr>
             {% for function, row in data.children %}
                 <tr>

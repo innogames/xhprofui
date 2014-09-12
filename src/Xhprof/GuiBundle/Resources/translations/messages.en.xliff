@@ -3,8 +3,160 @@
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
             <trans-unit id="1">
-                <source>Profilings list</source>
-                <target>Profilings list</target>
+                <source>toggle-navigation</source>
+                <target>Toggle navigation</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>profilings</source>
+                <target>Profilings</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>search</source>
+                <target>Search</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>new</source>
+                <target>New</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>profilings-list</source>
+                <target>Profilings overview</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>all-profilings</source>
+                <target>All profilings</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>prof-id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>prof-timestamp</source>
+                <target>Timestamp</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>prof-script</source>
+                <target>Script</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>prof-server</source>
+                <target>Server</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>prof-walltime</source>
+                <target>Walltime</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>profiling</source>
+                <target>Profiling</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>general-block</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>general-block-server-name</source>
+                <target>Server name</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>general-block-script</source>
+                <target>Script</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>general-block-request-method</source>
+                <target>Request method</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>data-block</source>
+                <target>Profiling data</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>data-block-walltime</source>
+                <target>Walltime</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>data-block-cpu</source>
+                <target>CPU</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>data-block-memory</source>
+                <target>Memory</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>data-block-peak-memory</source>
+                <target>Peak memory</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>request-block</source>
+                <target>Request</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>col-function</source>
+                <target>Function</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>col-calls</source>
+                <target>Calls</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>col-walltime</source>
+                <target>Incl. Wall Time (microsec)</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>col-excl-walltime</source>
+                <target>Excl. Wall Time (microsec)</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>col-cpu</source>
+                <target>Incl. CPU (cycles)</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>col-excl-cpu</source>
+                <target>Excl. CPU (cycles)</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>col-memory</source>
+                <target>Incl. Memory</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>col-excl-memory</source>
+                <target>Excl. Memory</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>col-peak-memory</source>
+                <target>Incl. Peak Memory</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>col-excl-peak-memory</source>
+                <target>Excl. Peak Memory</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>partial-current-function</source>
+                <target>Current function</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>partial-parent-function</source>
+                <target>Parent functions</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>partial-child-function</source>
+                <target>Child functions</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>back-to-overview</source>
+                <target>Back to overview</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>details-for-function</source>
+                <target>Details for function</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>all-profilings</source>
+                <target>All profilings</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>test-run</source>
+                <target>This is a test run</target>
             </trans-unit>
         </body>
     </file>

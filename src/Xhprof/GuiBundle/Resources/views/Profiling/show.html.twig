@@ -1,6 +1,6 @@
 {% extends 'XhprofGuiBundle::layout.html.twig' %}
 
-{% block title %}{% trans %}Profiling{% endtrans %}{% endblock %}
+{% block title %}{% trans %}profiling{% endtrans %}{% endblock %}
 {% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
 {% block subtitle_right %}{{ profiling.getTimestamp()|localizeddate('medium', 'medium') }}{% endblock %}
 
@@ -8,21 +8,21 @@
     <div class="col-lg-8">
         <div class="panel panel-default panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">{% trans %}General{% endtrans %}</h3>
+                <h3 class="panel-title">{% trans %}general-block{% endtrans %}</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
                     <tbody>
                         <tr>
-                            <td class="info_table_header"><strong>{% trans %}Server Name{% endtrans %}</strong></td>
+                            <td class="info_table_header"><strong>{% trans %}general-block-server-name{% endtrans %}</strong></td>
                             <td>{{ profiling.getServerName }}</td>
                         </tr>
                         <tr>
-                            <td class="info_table_header"><strong>{% trans %}Script{% endtrans %}</strong></td>
+                            <td class="info_table_header"><strong>{% trans %}general-block-script{% endtrans %}</strong></td>
                             <td>{{ profiling.getRequestUri }}</td>
                         </tr>
                         <tr>
-                            <td class="info_table_header"><strong>{% trans %}Request Method{% endtrans %}</strong></td>
+                            <td class="info_table_header"><strong>{% trans %}general-block-request-method{% endtrans %}</strong></td>
                             <td>{{ profiling.getRequestMethod }}</td>
                         </tr>
                     </tbody>
@@ -33,24 +33,24 @@
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{% trans %}Profiling data{% endtrans %}</h3>
+                        <h3 class="panel-title">{% trans %}data-block{% endtrans %}</h3>
                     </div>
                     <div class="panel-body">
                         <table class="table table-condensed">
                             <tr>
-                                <td class="info_table_header"><strong>{% trans %}Walltime{% endtrans %}</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}data-block-walltime{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getWallTime|localizednumber }} microsecs</td>
                             </tr>
                             <tr>
-                                <td class="info_table_header"><strong>{% trans %}CPU{% endtrans %}</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}data-block-cpu{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getCpu|localizednumber }} cycles</td>
                             </tr>
                             <tr>
-                                <td class="info_table_header"><strong>{% trans %}Memory{% endtrans %}</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}data-block-memory{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getMemory|localizednumber }} bytes</td>
                             </tr>
                             <tr>
-                                <td class="info_table_header"><strong>{% trans %}Peak Memory{% endtrans %}</strong></td>
+                                <td class="info_table_header"><strong>{% trans %}data-block-peak-memory{% endtrans %}</strong></td>
                                 <td class="text-right">{{ profiling.getPeakMemory|localizednumber }} bytes</td>
                             </tr>
                         </table>
@@ -62,7 +62,7 @@
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{% trans %}Request{% endtrans %}</h3>
+                <h3 class="panel-title">{% trans %}request-block{% endtrans %}</h3>
             </div>
             <div class="panel-body">
                 <table class="table table-condensed">
@@ -115,16 +115,16 @@
             <table class="table table-condensed table-striped">
                 <thead>
                 <tr>
-                    <th>{% trans %}Function{% endtrans %}</th>
-                    <th class="text-right">{% trans %}Calls{% endtrans %}</th>
-                    <th class="text-right">{% trans %}Incl. Wall Time (microsec){% endtrans %}</th>
-                    <th class="text-right">{% trans %}Excl. Wall Time (microsec){% endtrans %}</th>
-                    <th class="text-right">{% trans %}Incl. CPU (cycles){% endtrans %}</th>
-                    <th class="text-right">{% trans %}Excl. CPU (cycles){% endtrans %}</th>
-                    <th class="text-right">{% trans %}Incl. Memory{% endtrans %}</th>
-                    <th class="text-right">{% trans %}Excl. Memory{% endtrans %}</th>
-                    <th class="text-right">{% trans %}Incl. Peak Memory{% endtrans %}</th>
-                    <th class="text-right">{% trans %}Excl. Peak Memory{% endtrans %}</th>
+                    <th>{% trans %}col-function{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-calls{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-walltime{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-excl-walltime{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-cpu{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-excl-cpu{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-memory{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-excl-memory{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-peak-memory{% endtrans %}</th>
+                    <th class="text-right">{% trans %}col-excl-peak-memory{% endtrans %}</th>
                 </tr>
                 </thead>
                 <tbody>
