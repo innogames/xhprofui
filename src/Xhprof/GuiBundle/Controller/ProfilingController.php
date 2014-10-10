@@ -13,13 +13,13 @@ class ProfilingController extends Controller
      * Show a single profiling in detail
      *
      * @param integer $id the profiling id
-     * @param string $sort_by_metrics
+     * @param string $sort_by
      * @param string $sort_direction
      *
      * @throws \InvalidArgumentException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction($id, $sort_by_metrics, $sort_direction)
+    public function showAction($id, $sort_by, $sort_direction)
     {
         if (!is_numeric($id)) {
             throw new \InvalidArgumentException('Invalid id given, numeric value expected!');
@@ -31,12 +31,17 @@ class ProfilingController extends Controller
         if ($profiling) {
             $data = $profiling->getData();
             $parser = new DataParser();
-            $parsed_data = $parser->parse($data, $sort_by_metrics, $sort_direction);
+            $parsed_data = $parser->parse($data, $sort_by, $sort_direction);
         }
 
         return $this->render(
             'XhprofGuiBundle:Profiling:show.html.twig',
-            array('profiling' => $profiling, 'data' => $parsed_data)
+            array(
+                'profiling'      => $profiling,
+                'data'           => $parsed_data,
+                'sort_by'        => $sort_by,
+                'sort_direction' => $sort_direction
+            )
         );
     }
 
@@ -45,13 +50,13 @@ class ProfilingController extends Controller
      *
      * @param integer $id the profiling id
      * @param string  $function_id
-     * @param string  $sort_by_metrics
+     * @param string  $sort_by
      * @param string  $sort_direction
      *
      * @throws \InvalidArgumentException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function partialAction($id, $function_id, $sort_by_metrics, $sort_direction)
+    public function partialAction($id, $function_id, $sort_by, $sort_direction)
     {
         if (!is_numeric($id)) {
             throw new \InvalidArgumentException('Invalid id given, numeric value expected!');
@@ -65,13 +70,19 @@ class ProfilingController extends Controller
         if ($profiling) {
             $data = $profiling->getData();
             $parser = new DataParser();
-            $parsed_data = $parser->parsePartial($data, $function_id, $sort_by_metrics, $sort_direction);
+            $parsed_data = $parser->parsePartial($data, $function_id, $sort_by, $sort_direction);
             $function_name = DataParser::findNameById($function_id, $parsed_data['current']);
         }
 
         return $this->render(
             'XhprofGuiBundle:Profiling:partial.html.twig',
-            array('function_name' => $function_name, 'profiling' => $profiling, 'data' => $parsed_data)
+            array(
+                'function_name'  => $function_name,
+                'profiling'      => $profiling,
+                'data'           => $parsed_data,
+                'sort_by'        => $sort_by,
+                'sort_direction' => $sort_direction
+            )
         );
     }
 

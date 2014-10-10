@@ -1,4 +1,5 @@
 {% extends 'XhprofGuiBundle::layout.html.twig' %}
+{% import 'XhprofGuiBundle:Profiling:helper.html.twig' as helper %}
 
 {% block title %}{% trans %}profiling{% endtrans %}{% endblock %}
 {% block subtitle %}{{ profiling.getRequestUri }}{% endblock %}
@@ -115,16 +116,16 @@
             <table class="table table-condensed table-striped">
                 <thead>
                 <tr>
-                    <th>{% trans %}col-function{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-calls{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-walltime{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-excl-walltime{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-cpu{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-excl-cpu{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-memory{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-excl-memory{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-peak-memory{% endtrans %}</th>
-                    <th class="text-right">{% trans %}col-excl-peak-memory{% endtrans %}</th>
+                    <th><a href="{{ helper.profiling_col_link('function', profiling, sort_by, sort_direction) }}">{% trans %}col-function{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('ct', profiling, sort_by, sort_direction) }}">{% trans %}col-calls{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('wt', profiling, sort_by, sort_direction) }}">{% trans %}col-walltime{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('excl_wt', profiling, sort_by, sort_direction) }}">{% trans %}col-excl-walltime{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('cpu', profiling, sort_by, sort_direction) }}">{% trans %}col-cpu{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('excl_cpu', profiling, sort_by, sort_direction) }}">{% trans %}col-excl-cpu{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('mu', profiling, sort_by, sort_direction) }}">{% trans %}col-memory{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('excl_mu', profiling, sort_by, sort_direction) }}">{% trans %}col-excl-memory{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('pmu', profiling, sort_by, sort_direction) }}">{% trans %}col-peak-memory{% endtrans %}</a></th>
+                    <th class="text-right"><a href="{{ helper.profiling_col_link('excl_pmu', profiling, sort_by, sort_direction) }}">{% trans %}col-excl-peak-memory{% endtrans %}</a></th>
                 </tr>
                 </thead>
                 <tbody>

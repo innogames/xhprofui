@@ -1,0 +1,10 @@
+{% macro profiling_col_link(column, profiling, sort_by, sort_direction) %}
+    {% set sort_asc = constant('Xhprof\\GuiBundle\\Model\\DataParser::SORT_ASC')  %}
+    {% set sort_desc = constant('Xhprof\\GuiBundle\\Model\\DataParser::SORT_DESC')  %}
+    {% if column == sort_by and sort_direction == sort_desc %}
+        {% set sort_direction = sort_asc %}
+    {% else %}
+        {% set sort_direction = sort_desc %}
+    {% endif %}
+    {{ path('xhprof_gui_show', {'id': profiling.getId, 'sort_by': column, 'sort_direction': sort_direction}) }}
+{% endmacro %}

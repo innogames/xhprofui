@@ -10,6 +10,8 @@ class DataParser
     const SORT_ASC  = 'ASC';
     const SORT_DESC = 'DESC';
 
+    const SORT_FUNCTION = 'function';
+
     const METRIC_COUNT = 'ct';
     const METRIC_WALL_TIME = 'wt';
     const METRIC_CPU = 'cpu';
@@ -45,30 +47,29 @@ class DataParser
         self::METRIC_PEAK_MEMORY_USAGE => self::METRIC_EXCL_PEAK_MEMORY_USAGE
     ];
 
-    private $parsed_data = array();
-
     /**
      * parse and returns the data sorted by the given metric and direction
      *
      * @param array  $raw_data
-     * @param string $sort_by_metric
+     * @param string $sort_by
      * @param string $sort_direction
      *
      * @throws \InvalidArgumentException
      * @return array
      */
-    public function parse(array $raw_data, $sort_by_metric = null, $sort_direction = null)
+    public function parse(array $raw_data, $sort_by = null, $sort_direction = null)
     {
-        if ($sort_by_metric === null) {
-            $sort_by_metric = self::METRIC_WALL_TIME;
+        if ($sort_by === null) {
+            $sort_by = self::METRIC_WALL_TIME;
         }
         if ($sort_direction === null) {
             $sort_direction = self::SORT_DESC;
         }
-        $sort_by_metric = strtolower($sort_by_metric);
+        $sort_by = strtolower($sort_by);
         $sort_direction = strtoupper($sort_direction);
 
-        if (!in_array($sort_by_metric, $this->metrics)) {
+        if ($sort_by != self::SORT_FUNCTION && !in_array($sort_by, $this->metrics)
+            && !in_array($sort_by, $this->exclusive_metrics)) {
             throw new InvalidArgumentException('unknown metric for sorting given!');
         }
         if ($sort_direction != self::SORT_DESC && $sort_direction != self::SORT_ASC) {
@@ -79,7 +80,7 @@ class DataParser
         $parsed_data = $this->parseInclusiveMetrics($raw_data, $parsed_data);
         $parsed_data = $this->parseExclusiveMetrics($raw_data, $parsed_data);
 
-        return $this->sortDataByMetric($parsed_data, $sort_by_metric, $sort_direction);
+        return $this->sortDataBy($parsed_data, $sort_by, $sort_direction);
     }
 
     /**
@@ -127,10 +128,10 @@ class DataParser
         }
 
         if (!empty($result['parents'])) {
-            $result['parents'] = $this->sortDataByMetric($result['parents'], $sort_by_metric, $sort_direction);
+            $result['parents'] = $this->sortDataBy($result['parents'], $sort_by_metric, $sort_direction);
         }
         if (!empty($result['children'])) {
-            $result['children'] = $this->sortDataByMetric($result['children'], $sort_by_metric, $sort_direction);
+            $result['children'] = $this->sortDataBy($result['children'], $sort_by_metric, $sort_direction);
         }
 
         return $result;
@@ -187,26 +188,41 @@ class DataParser
      * sort by given metric and direction
      *
      * @param array  $data
-     * @param string $metric
+     * @param string $sort_by
      * @param string $direction sort direction (ASC/DESC), defaults to ASC
      *
      * @return array
      */
-    private function sortDataByMetric($data, $metric, $direction = self::SORT_ASC)
+    private function sortDataBy($data, $sort_by, $direction = self::SORT_ASC)
     {
-        uasort(
-            $data,
-            function ($a, $b) use ($metric, $direction) {
-                if ($a[$metric] == $b[$metric]) {
-                    return 0;
-                }
+        if ($sort_by == self::SORT_FUNCTION) {
+            $sort_function = 'uksort';
+        } else {
+            $sort_function = 'uasort';
+        }
+        call_user_func_array(
+            $sort_function,
+            array(
+                & $data,
+                function ($a, $b) use ($sort_by, $direction) {
+                    if ($sort_by == self::SORT_FUNCTION) {
+                        if ($direction == self::SORT_ASC) {
+                            return strcasecmp($a, $b);
+                        } else {
+                            return strcasecmp($b, $a);
+                        }
+                    }
+                    if ($a[$sort_by] == $b[$sort_by]) {
+                        return 0;
+                    }
 
-                if ($direction == self::SORT_DESC) {
-                    return ($a[$metric] < $b[$metric]) ? 1 : -1;
-                } else {
-                    return ($a[$metric] < $b[$metric]) ? -1 : 1;
+                    if ($direction == self::SORT_DESC) {
+                        return ($a[$sort_by] < $b[$sort_by]) ? 1 : -1;
+                    } else {
+                        return ($a[$sort_by] < $b[$sort_by]) ? -1 : 1;
+                    }
                 }
-            }
+            )
         );
 
         return $data;
